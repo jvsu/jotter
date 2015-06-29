@@ -1,0 +1,146 @@
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.notes{
+			overflow-x: scroll;
+    		overflow-y: hidden;
+   		 	white-space: nowrap;
+   		 	margin-left:10px;
+		}
+
+		.jot{
+			height:300px;
+			width:310px;
+			border:1px solid #F8F8F8;
+			display:inline-block;
+			vertical-align: top;
+			margin:5px;
+			overflow-y:scroll;
+			overflow-x:hidden;
+			white-space:normal;
+		}	
+		.note_content{
+			padding:5px;
+			margin:5px;
+		}
+
+		.collection_vid{
+			display: block;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		#back{
+			float:right;
+			margin-right:100px;
+		}
+		.title{
+			display:inline-block;
+			width:500px;
+			margin-left:25px;
+	
+		}
+		.upper_options h4{
+			display:inline-block;
+			text-transform: capitalize;
+		}
+		.delete{
+			width:100px;
+			display:inline-block;
+			vertical-align: top;
+		}
+		h1{
+			margin-bottom:30px;
+		}
+		.time{
+			padding:5px;
+			margin:5px;
+		}
+		#video_section{
+			height:400px;	
+			border-bottom:1px solid #F8F8F8;		
+		}
+		#all_collections{
+			height:900px;
+			overflow-y:scroll;
+			overflow-x:hidden;
+			margin-bottom:50px;
+		}
+		.jot_info a, .jot_info p{
+			display:inline-block;
+		}
+		.collection{
+			padding:5px;
+
+		}
+		#ytplayer{
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		#video{	
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			width:650px;
+			height:395px;
+			border:1px solid #F8F8F8;
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("button").click(function(event){
+				id_name = $(this).attr("id");
+				if(id_name[0]=='v')
+				{
+					// video_code = id_name.slice(1);
+					var st_index_start = id_name.indexOf("+");
+					var st_index_end = id_name.indexOf("_");
+					var start_time = id_name.substring(st_index_start+1,st_index_end);
+					var last_index = id_name.length
+					var video_code = id_name.substring(st_index_end+1,last_index)
+					$("#video").html("<iframe id='ytplayer' type='text/html' width='640' height='390' src=http://www.youtube.com/embed/"+video_code+"?autoplay=1&start="+start_time+"></iframe>");
+					return false;
+				}
+			})
+		})
+	</script>
+</head>
+<body>
+	<h1>All Collections</h1>
+	<a href="/homes/index" id='back'>Home</a>
+	<div id='video_section'>
+		<div id='video'></div>
+
+	</div>
+	<div id='all_collections'>
+		<%@collections.each do |collection| %>
+			<div class='collection'>
+				<div class='upper_options'>
+					<h4><a href="/notes/new/<%=collection.id %>" class='title'><%= collection.name%></a></h4>
+					<a href="/collections/destroy/<%=collection.id %>" class='delete'>Delete</a>
+				</div>
+				
+				<div class='notes'>
+					<% @notes.each do |note|%>
+						<%if note.collection_id == collection.id %>
+							<div class='jot'>
+								<div class='jot_info'>
+									<p class='time'>Time: <%=note.time_stamp_h%>H <%=note.time_stamp_m%> M <%= note.time_stamp_s%> S</p>
+									<a href="/notes/retrieve/<%=note.id %>">Edit</a>
+									<button id='v+<%=note.start_time%>_<%=note.url %>' class='btn btn-link'>Play</button>
+								</div>
+								<p class='note_content'><%=note.notes %></p>
+							</div>	
+
+						<% end%>
+					<%end %>
+				</div>
+			</div>
+
+		<%end %>
+
+		<h1>End</h1>
+	</div>
+</body>
+</html>

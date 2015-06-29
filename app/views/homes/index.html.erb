@@ -1,0 +1,92 @@
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#upper a{
+			float:right;
+			width:50px;
+			margin-right:100px;
+
+		}
+		#new_note input{
+			display:block;
+		}
+		.new_input{
+			width:200px;
+			height:40px;
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		#new_note h2{
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			width:230px;
+		}
+		#new_note{
+			margin-top:50px;
+		}
+		#note_submit{
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			margin-top:5px;
+		}
+		#upper h1{
+			width:140px;
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			margin-top:20px;
+		}
+		#options{
+			margin-left:200px;
+		}
+		#options a{
+			margin:5px;
+		}
+		#messages{
+			width:150px;
+			margin-left:auto;
+			margin-right:auto;
+			margin-top:20px;
+		}
+		.error{
+			color:red;
+		}
+	</style>
+</head>
+<body>
+	<div id='upper'>
+		<h1>JOT</h1>
+		<a href="/sessions/destroy">Logoff</a>
+	</div>
+	
+	<div id='options'>
+		<a href="/collections/all" class='btn btn-success'>Notes</a>
+		<a href="/groups/all" class='btn btn-success'>Groups</a>
+		<a href="/papers/index" class='btn btn-success'>Paper</a>
+	</div>
+	
+
+	<div id='new_note'>
+		<h2>Add New Notes</h2>
+		<form action='/collections/create' method='post'>
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<input type='text' name='collection[url]' placeholder='Enter Video Code' class='new_input'>
+			<input type='hidden' name='collection[user_id]' value=<%=@user.id%>>
+			<input type='text' name='collection[name]' placeholder='Enter Collection Name' class='new_input'>
+			<input type='submit' value='Submit' class='btn btn-success' id='note_submit'>
+		</form>
+	</div>
+		<div id='messages'>
+			<% if flash[:message]%>
+			<h4 class='error'>Error:</h4>
+			<% flash[:message].each do |message|%>
+				<p class='error'><%= message%></p>
+			<% end%>
+		<% end%>
+		</div>
+</body>
+</html>

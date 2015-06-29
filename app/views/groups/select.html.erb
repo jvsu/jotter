@@ -1,0 +1,218 @@
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.notes{
+			overflow-x: scroll;
+    		overflow-y: hidden;
+   		 	white-space: nowrap;
+		}
+
+		.jot{
+			height:300px;
+			width:300px;
+			border:1px solid black;
+			display:inline-block;
+			vertical-align: top;
+			margin:5px;
+			overflow-y:scroll;
+			overflow-x:hidden;
+			white-space:normal;
+		}
+		#remove_button{
+			width:70px;
+			height:30px;
+			padding:5px;
+		}
+		#submit_1, #submit_2{
+			width:70px;
+			height:30px;
+			padding:5px;
+		}
+			h2{
+			text-transform: capitalize;
+			width:280px;
+			margin-right: auto;
+			margin-left:auto;
+		}
+		#back{
+			float:right;
+			margin-right:100px;
+		}
+		#video{
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			width:650px;
+		}
+		#all_collections{
+			height:1000px;
+			overflow-y:scroll;
+			overflow-x:hidden;
+			margin-top:50px;
+		}
+		.btn.btn-danger{
+			width:70px;
+			height:22px;
+			padding:1px;
+			margin-left:150px;
+			margin-top:10px;
+			margin-bottom:10px;
+		}
+
+		.btn.btn-success{
+			width:70px;
+			height:22px;
+			padding:1px;
+			margin-left:150px;
+			margin-top:10px;
+			margin-bottom:10px;
+		}
+		.note_content{
+			margin-left:15px;
+		}
+
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			//Video Player
+			$("a").click(function(event){
+				id_name = $(this).attr("id");
+				if(id_name[0]=='v')
+				{
+					// video_code = id_name.slice(1);
+					var st_index_start = id_name.indexOf("+");
+					var st_index_end = id_name.indexOf("_");
+					var start_time = id_name.substring(st_index_start+1,st_index_end);
+					var last_index = id_name.length
+					var video_code = id_name.substring(st_index_end+1,last_index)
+					$("#video").html("<iframe id='ytplayer' type='text/html' width='640' height='390' src=http://www.youtube.com/embed/"+video_code+"?autoplay=1&start="+start_time+"></iframe>");
+					return false;
+				}
+					
+			})
+
+
+		// 	$(document).submit(function(event){
+
+		// 		var id_name = $(this).attr('id');
+		// 		var id_name_length = id_name.length;
+		// 		var id_name_string = id_name.substring(0,8);// Get what type of submit and delete button it is. 
+		// 		//get the id of the note, and thus the subsequent form 
+		// 		var start_index = id_name.indexOf("-");
+		// 		var form_id = id_name.substring(start_index+1,id_name_length);
+
+
+		// 		if (id_name_string == 'remove_1') 
+		// 		{
+		// 			var object = "#remove_"+form_id;
+		// 			$(object).submit(function()
+		// 			{
+		// 				$.post($(this).attr('action'),$(object).serialize(),function(data)
+		// 				{
+		// 					alert('hello');
+		// 				},"json");
+		// 			// alert(object);
+		// 			})//end of submit 
+		// 		}
+		// 		else if(id_name_string == 'submit_1')
+		// 		{
+		// 			var object = "#add_1_"+form_id;
+
+		// 			$(object).submit(function()
+		// 			{
+		// 				$.post($(this).attr('action'),$(this).serialize(),function(data)
+		// 				{
+		// 					alert(data.message);
+		// 				},"json");
+		// 			// alert(object);
+				
+		// 			});
+		// 		}
+		// 		else if(id_name_string =='submit_2')
+		// 		{
+		// 			var object = "#add_2_"+form_id;
+		// 			$(object).submit(function()
+		// 			{
+		// 				$.post($(this).attr('action'),$(this).serialize(),function(data)
+		// 				{
+		// 					alert(data.message);
+		// 				},"json");
+		// 			// alert(object);
+		// 			});
+		// 		}
+		// 		else
+		// 		{
+		// 			alert('error');
+		// 			return false;
+		// 		}
+		// 		return false;
+		// 	})// end button click 
+		})	// document.ready 	
+	</script>
+
+</head>
+<body>
+	<h2>Your Notes</h2>
+	<a href="/groups/view/<%=@group_id %>" id='back'>Back</a>
+	<% if flash[:message]%>
+		<p><%=flash[:message]%></p>
+	<% end%>
+	<div id='video'></div>
+	<div id='all_collections'>
+		<% @collections.each do |collection|%>
+			<div class='notes'>
+				<h4><%= collection.name%></h4>
+					<%@notes.each do |note| %>
+						<%if note.collection_id == collection.id %>
+							<div class='jot'>
+									<% if @group_notes !=[]%>
+										<%@group_notes.each  do |gn|%> 
+											<% if gn.note_id == note.id%>
+												<form id='remove_<%=note.id %>' action="/groupnotes/delete" method='post'>
+													<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+													<input type='hidden' name='group_note[note_id]' value=<%=note.id %>>
+													<input type='hidden' name='group_note[group_id]' value=<%= @group_id%>>
+													<input type='hidden' name='group_note[user_id]' value=<%=@user.id %>>
+													<input type='hidden' name='group_note[gnote]' value=<%=gn.id %>>
+													<!-- <input type='submit' value='Remove' id='remove_button' class='btn btn-danger'> -->
+													<button id="remove_1-<%= note.id %>" class='btn btn-danger'>Remove</button>
+												</form>
+												
+										<% end%>
+										<%end %>	
+										
+											<% @all_notes.each do |nn|%>
+												<% if nn == note.id %>
+													<form id='add_1_<%=note.id %>' action="/groupnotes/create" method='post'>
+														<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+														<input type='hidden' name='group_note[note_id]' value=<%=note.id %>>
+														<input type='hidden' name='group_note[group_id]' value=<%= @group_id%>>
+														<input type='hidden' name='group_note[user_id]' value=<%=@user.id %>>
+														<!-- <input type='submit' value='Add' id='submit_1' class='btn btn-success'> -->
+														<button id='submit_1-<%=note.id %>' class='btn btn-success'>Add</button>
+													</form>
+													
+												<%end %>
+											<%end %>
+									<%else%>
+										<form id='add_2_<%= note.id%>' action="/groupnotes/create" method='post'>
+											<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+											<input type='hidden' name='group_note[note_id]' value=<%=note.id %>>
+											<input type='hidden' name='group_note[group_id]' value=<%= @group_id%>>
+											<input type='hidden' name='group_note[user_id]' value=<%=@user.id %>>
+											<!-- <input type='submit' value='Add' id='submit_2' class='btn btn-success'> -->
+											<button id='submit_2-<%=note.id %>' class='btn btn-success'>Add</button>
+										</form>
+											
+									<% end%>
+								<p class='note_content'><a href='' id="v+<%=note.start_time%>_<%=note.url %>"><%=note.notes %></a></p>
+							</div>
+						<% end%>
+					<%end%>
+				</div>
+		<% end%>	
+	</div>
+
+</body>
+</html>
