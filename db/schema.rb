@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629224949) do
+ActiveRecord::Schema.define(version: 20150706170718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,40 @@ ActiveRecord::Schema.define(version: 20150629224949) do
 
   add_index "notes", ["collection_id"], name: "index_notes_on_collection_id", using: :btree
   add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
+
+  create_table "papers", force: true do |t|
+    t.string   "name"
+    t.string   "thesis"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "papers", ["user_id"], name: "index_papers_on_user_id", using: :btree
+
+  create_table "point_supports", force: true do |t|
+    t.integer  "note_id"
+    t.integer  "point_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "point_supports", ["note_id"], name: "index_point_supports_on_note_id", using: :btree
+  add_index "point_supports", ["point_id"], name: "index_point_supports_on_point_id", using: :btree
+  add_index "point_supports", ["user_id"], name: "index_point_supports_on_user_id", using: :btree
+
+  create_table "points", force: true do |t|
+    t.integer  "paper_id"
+    t.integer  "user_id"
+    t.string   "description"
+    t.text     "explanation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "points", ["paper_id"], name: "index_points_on_paper_id", using: :btree
+  add_index "points", ["user_id"], name: "index_points_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"

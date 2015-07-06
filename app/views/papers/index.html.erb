@@ -1,0 +1,113 @@
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		textarea{
+			display:block;
+		}
+		input{
+			display:block;
+		}
+		.paper{
+			width:250px;
+			height:250px;
+			border:1px solid black;
+			margin:5px;
+			display:inline-block;
+			border:1px solid #E8E8E8;
+			vertical-align: top;
+		}
+		.paper h4, .paper a{
+			text-transform: capitalize;
+			margin:5px;
+		}
+		#new_paper{
+			width: 300px;
+			margin-left:auto;
+			margin-right:auto;
+		}	
+		#paper_name{
+			width:310px;
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			height:40px;
+			margin-bottom:10px;
+			border:1px solid #E8E8E8;
+		}
+		#new_paper textarea{
+			width:310px;
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			height:100px;
+			margin-bottom:10px;
+			border:1px solid #E8E8E8;
+		}
+		.btn.btn-primary{
+			display:block;
+			margin-left: auto;
+			margin-right:auto;
+		}
+		#back{
+			float:right;
+			margin-right:100px;
+		}
+		#all_paper{
+			margin-left:15px;
+		}
+		h3{
+			margin-left:10px;
+		}
+		h1{
+			width:200px;
+			margin-left:auto;
+			margin-right:auto;
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#new_paper_form").submit(function(){
+				$.post($(this).attr('action'),$(this).serialize(),function(data){
+					if(data.message =='success')
+					{
+						$("#all_paper").prepend("<div class='paper'><h4><a href='/papers/new/"+data.paper_id+"'>"+data.name+"</a></h4><a href='/papers/delete/"+data.paper_id+"'>Delete</a></div>")
+					}
+					else
+					{
+						alert(data.messages);
+					}
+				}, "json");
+			return false;
+			})
+		})// end of ready()
+
+
+	</script>
+</head>
+<body>
+	<h1>JOT</h1>
+	<a href="/homes/index" id='back'>Back</a>
+	<div id='new_paper'>
+		<h3>Create New Paper</h3>
+		<form action='/papers/create' method='post' id='new_paper_form'>
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<input type='text' name='paper[name]' placeholder='Enter Name' id='paper_name'>
+			<textarea name='paper[thesis]' placeholder='Enter Thesis'></textarea>
+			<input type='hidden' name='paper[user_id]' value=<%= @user.id%>>
+			<input type='submit' value='Submit' id='sub' class='btn btn-primary'>
+		</form>
+	</div>
+
+	<h3>Papers</h3>
+	<div id='all_paper'>
+		<%@papers.each do |paper| %>
+		<div class='paper'>
+			<h4><a href="/papers/new/<%=paper.id %>"><%= paper.name %></a></h4>
+			<a href="/papers/delete/<%= paper.id%>">Delete</a>
+		</div>
+			
+		<% end%>
+	</div>
+</body>
+</html>

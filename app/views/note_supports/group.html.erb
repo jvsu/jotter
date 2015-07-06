@@ -1,0 +1,125 @@
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		h2{
+			text-transform: capitalize;
+			width:280px;
+			margin-right: auto;
+			margin-left:auto;
+		}
+		.btn.btn-success{
+			width:200px;
+			height:40px;
+			padding:10px;
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			margin-top:30px;
+		}
+		#back{
+			float:right;
+			margin-right:100px;
+		}
+		h3{
+			margin-left:20px;
+		}
+		.note{
+			width:250px;
+			height:250px;
+			border: 1px solid black;
+			display:inline-block;
+			vertical-align: top;
+			margin:5px;
+		}
+		#add{
+			display:block;
+			float:bottom;
+		}
+		.btn.btn-danger{
+			width:70px;
+			height:22px;
+			padding:1px;
+			margin-left:150px;
+			margin-top:10px;
+			margin-bottom:10px;
+		}
+		.note{
+			width:300px;
+			height:300px;
+			border: 1px solid #F8F8F8;
+			display:inline-block;
+			vertical-align: top;
+			margin:5px;
+			overflow-y:scroll;
+			overflow-x:hidden;
+			white-space:normal;
+		}
+		.note p{
+			margin-left:10px;
+		}
+		#current_notes{
+			margin:30px;
+			margin-left:70px;
+			height:1000px;
+			overflow-y:scroll;
+			overflow-x:hidden;
+
+		}
+		#video{
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			width:650px;
+		}
+	</style>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("a").click(function(event){
+					id_name = $(this).attr("id");
+					if(id_name[0]=='v')
+					{
+						// video_code = id_name.slice(1);
+						var st_index_start = id_name.indexOf("+");
+						var st_index_end = id_name.indexOf("_");
+						var start_time = id_name.substring(st_index_start+1,st_index_end);
+						var last_index = id_name.length
+						var video_code = id_name.substring(st_index_end+1,last_index)
+						$("#video").html("<iframe id='ytplayer' type='text/html' width='640' height='390' src=http://www.youtube.com/embed/"+video_code+"?autoplay=1&start="+start_time+"></iframe>");
+						return false;
+					}			
+				})
+			})
+	</script>
+</head>
+<body>
+	<h2><%=@group.name %></h2>
+	<a href="/notesupports/all_groups/<%=@point_id %>" id='back'>Back</a>
+	
+	<%if flash[:message] %>
+		<p><%=flash[:message] %></p> 
+	<% end%>
+	<div id='video'>
+
+	</div>
+	<h3>Current Notes</h3>
+	<div id='current_notes'>
+		<% @group_notes.each do |gn|%>
+			<div class='note'>
+				<!-- note, point, user.id -->
+				<form id='add' action="/note_supports/create" method='post'>
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+					<input type='hidden' name='support[note_id]' value=<%= gn.note_id%>>
+					<input type='hidden' name='support[user_id]' value=<%=@user.id %>>
+					<input type='hidden' name='support[point_id]' value=<%=@point_id%>>
+					<input type='hidden' name='support[group_id]' value=<%= gn.group_id%>>
+					<input type='submit' value='Add' id='add_button' class='btn btn-danger'>
+				</form>
+				<p><a id="v+<%=gn.note.start_time%>_<%=gn.note.url %>" href=""><%= gn.note.notes%></a></p> 
+			</div>
+		<% end%>
+		
+
+	</div>
+</body>
+</html>

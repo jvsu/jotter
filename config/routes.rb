@@ -1,40 +1,5 @@
 Rails.application.routes.draw do
-  get 'group_notes/create'
-
-  get 'group_notes/delete'
-
-  get 'groups/create'
-
-  get 'groups/view'
-
-  get 'groups/all'
-
-  get 'groups/select'
-
-  get 'groups/delete'
-
-  get 'notes/new'
-
-  get 'notes/create'
-
-  get 'notes/retrieve'
-
-  get 'notes/update'
-
-  get 'notes/destroy'
-
-  get 'collections/create'
-
-  get 'collections/all'
-
-  get 'collections/retrieve'
-
-  get 'collections/update'
-
-  get 'collections/destroy'
-
-  get 'homes/index'
-
+  
   get 'note_supports/all'
 
   get 'note_supports/new'
