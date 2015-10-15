@@ -1,0 +1,133 @@
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.tag p, .tag a{
+			display:inline-block;
+			margin:5px;
+		}
+		#all_tags{
+			display:inline-block;
+			vertical-align: top;
+		}
+		#your_tags{
+			display:inline-block;
+			vertical-align: top;
+			margin-right:60px;
+		}
+		#list{
+			margin-left:auto;
+			margin-right:auto;
+			width:34em;
+		}
+		#back{
+			float:right;
+			margin-right:100px;
+		}
+		h1{
+			width:140px;
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			margin-top:20px;
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("a").click(function(event){
+				// get the id where there is info in the name and see if it's the back button
+				var id = $(this).attr("id");
+				if(id !='back')
+				{
+					var attr = $(this).attr("href");
+					var start_index = id.indexOf("y");
+					var mid_index = id.indexOf("_");
+					var end_index = id.indexOf("+");
+					var tag = id.substring(start_index+1, mid_index);
+					var user_id = id.substring(mid_index+1, end_index);
+					$.get(attr,{tag:tag,user_id:user_id},function(data){
+						if(data.method=='add')
+						{
+							tid = "tag"+data.tag;
+							$("#"+tid).remove();
+							$("#your_tags").append("<div class='tag' id='tag"+data.tag+"'><p>"+data.tag+"</p><a href='/tags/remove' id='y"+data.tag+"_"+data.user_id+"+'>Remove</a></div>");
+						}
+						else if(data.method=='remove')
+						{
+							tid = "tag"+data.tag;
+							$("#"+tid).remove();
+							$("#all_tags").append("<div class='tag' id='tag"+data.tag+"'><p>"+data.tag+"</p><a href='/tags/add' id='y"+data.tag+"_"+data.user_id+"+'>Add</a></div>");
+						}
+
+					},"json");
+					return false;
+				}
+			})
+		})
+
+		//dynamic button
+
+		$(document).on('click','a',function(event){
+			var id = $(this).attr("id");
+			if(id !='back')
+			{
+				var attr = $(this).attr("href");
+				var start_index = id.indexOf("y");
+				var mid_index = id.indexOf("_");
+				var end_index = id.indexOf("+");
+				var tag = id.substring(start_index+1, mid_index);
+				var user_id = id.substring(mid_index+1, end_index);
+				$.get(attr,{tag:tag,user_id:user_id},function(data){
+						if(data.method=='add')
+						{
+							tid = "tag"+data.tag;
+							$("#"+tid).remove();
+							$("#your_tags").append("<div class='tag' id='tag"+data.tag+"'><p>"+data.tag+"</p><a href='/tags/remove' id='y"+data.tag+"_"+data.user_id+"+'>Remove</a></div>");
+						}
+						else if(data.method=='remove')
+						{
+							tid = "tag"+data.tag;
+							$("#"+tid).remove();
+							$("#all_tags").append("<div class='tag' id='tag"+data.tag+"'><p>"+data.tag+"</p><a href='/tags/add' id='y"+data.tag+"_"+data.user_id+"+'>Add</a></div>");
+						}
+					},"json");	
+					return false;
+			}
+			
+		});
+
+	</script>
+
+</head>
+<body>
+	<h1>Jot</h1>
+	<a href="/homes/index" id='back'>Back</a>
+		<div id='list'>
+			<div id='your_tags'>
+			 <h3>Your Tags:</h3>
+				<%@my_tags.each do |yt| %>
+					<div class='tag' id="tag<%=yt %>">
+						<p ><%=yt%></p>
+						<a href="/tags/remove" id="y<%=yt%>_<%=@user.id%>+" >Remove</a>
+					</div>
+				<%end %>
+			</div>
+		
+		<div id='all_tags'>
+			<h3>More Tags</h3>
+			<%@tags.each do |t| %>
+			<div class='tag' id="tag<%=t %>">
+				<p ><%= t%></p>
+				<a href="/tags/add" id="y<%=t%>_<%=@user.id %>+">Add</a>
+			</div>	
+			<%end %>
+		</div>	
+	</div>
+
+
+
+
+
+	
+</body>
+</html>

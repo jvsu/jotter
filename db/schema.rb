@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706170718) do
+ActiveRecord::Schema.define(version: 20151015192354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20150706170718) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "share"
   end
 
   create_table "group_notes", force: true do |t|
@@ -95,6 +96,25 @@ ActiveRecord::Schema.define(version: 20150706170718) do
   add_index "points", ["paper_id"], name: "index_points_on_paper_id", using: :btree
   add_index "points", ["user_id"], name: "index_points_on_user_id", using: :btree
 
+  create_table "saves", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "collection_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "saves", ["collection_id"], name: "index_saves_on_collection_id", using: :btree
+  add_index "saves", ["user_id"], name: "index_saves_on_user_id", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string   "tag_name"
+    t.integer  "collection_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tags", ["collection_id"], name: "index_tags_on_collection_id", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -105,5 +125,14 @@ ActiveRecord::Schema.define(version: 20150706170718) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "your_tags", force: true do |t|
+    t.string   "tag"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "your_tags", ["user_id"], name: "index_your_tags_on_user_id", using: :btree
 
 end

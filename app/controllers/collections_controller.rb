@@ -1,5 +1,5 @@
 class CollectionsController < ApplicationController
- def create
+  def create
   collection = Collection.new(collection_params)
   if collection.save
     redirect_to "/notes/new/#{collection.id}"
@@ -34,4 +34,5 @@ private
     params.require(:collection).permit(:name, :url, :user_id)
   
   end
+
 end

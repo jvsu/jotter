@@ -7,11 +7,10 @@
     		overflow-y: hidden;
    		 	white-space: nowrap;
 		}
-
 		.jot{
 			height:300px;
 			width:300px;
-			border:1px solid #F8F8F8;
+			border:1px solid #D8D8D8;
 			display:inline-block;
 			vertical-align: top;
 			margin:5px;
@@ -50,7 +49,6 @@
 			overflow-y:scroll;
 			overflow-x:hidden;
 			margin-top:50px;
-			margin-left:15px;
 		}
 		.btn.btn-danger{
 			width:70px;
@@ -72,9 +70,7 @@
 		.note_content{
 			margin-left:15px;
 		}
-		.notes h4{
-			text-transform: capitalize;
-		}
+
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -89,69 +85,51 @@
 					var start_time = id_name.substring(st_index_start+1,st_index_end);
 					var last_index = id_name.length
 					var video_code = id_name.substring(st_index_end+1,last_index)
-					$("#video").html("<iframe id='ytplayer' type='text/html' width='640' height='390' src=https://www.youtube.com/embed/"+video_code+"?autoplay=1&start="+start_time+"></iframe>");
+					$("#video").html("<iframe id='ytplayer' type='text/html' width='640' height='390' src=http://www.youtube.com/embed/"+video_code+"?autoplay=1&start="+start_time+"></iframe>");
 					return false;
-				}
-					
+				}		
 			})
+		//add and remove button
+		$("form").submit(function(){
+			$.post($(this).attr('action'),$(this).serialize(),function(data){
+				if(data.action =='add' && data.message=='success')
+				{
+					// add remove button
+					// add gn_note
+					$("#form_"+data.note_id).html("<form id='remove_"+data.note_id+"' action='/groupnotes/delete' method='post'><input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden'><input type='hidden' name='group_note[note_id]' value="+data.note_id+"><input type='hidden' name='group_note[group_id]' value="+data.group_id+"><input type='hidden' name='group_note[user_id]' value="+data.user_id+"><input type='hidden' name='group_note[gnote]' value="+data.gn_id+"><input type='submit' value='Remove' id='remove_button' class='btn btn-danger'></form>");
+				}
+				else if(data.action=='remove' && data.message=='success')
+				{
+					$("#form_"+data.note_id).html("<form id='add_1_"+data.note_id+"' action='/groupnotes/create' method='post'><input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden'><input type='hidden' name='group_note[note_id]' value="+data.note_id+"><input type='hidden' name='group_note[group_id]' value="+data.group_id+"><input type='hidden' name='group_note[user_id]' value="+data.user_id+"><input type='submit' value='Add' id='submit_1' class='btn btn-success'></form>");
+				}
+				else{
+					alert("Error Occurred");
+				}
+			},"json");
+			return false;
+		})
+	})	// document.ready 	
+	// dynamic button
 
+	$(document).on('submit','form',function(){
+		$.post($(this).attr('action'),$(this).serialize(),function(data){
+			if(data.action =='add' && data.message=='success')
+			{
+				// add remove button
+				$("#form_"+data.note_id).html("<form id='remove_"+data.note_id+"' action='/groupnotes/delete' method='post'><input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden'><input type='hidden' name='group_note[note_id]' value="+data.note_id+"><input type='hidden' name='group_note[group_id]' value="+data.group_id+"><input type='hidden' name='group_note[user_id]' value="+data.user_id+"><input type='hidden' name='group_note[gnote]' value="+data.gn_id+"><input type='submit' value='Remove' id='remove_button' class='btn btn-danger'></form>");
+			}
+			else if(data.action=='remove' && data.message=='success')
+			{
+				$("#form_"+data.note_id).html("<form id='add_1_"+data.note_id+"' action='/groupnotes/create' method='post'><input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden'><input type='hidden' name='group_note[note_id]' value="+data.note_id+"><input type='hidden' name='group_note[group_id]' value="+data.group_id+"><input type='hidden' name='group_note[user_id]' value="+data.user_id+"><input type='submit' value='Add' id='submit_1' class='btn btn-success'></form>");
+			}
+			else{
+				alert("Error Occurred");
+			}
+		},"json");
+		return false;
+	})
+		
 
-		// 	$(document).submit(function(event){
-
-		// 		var id_name = $(this).attr('id');
-		// 		var id_name_length = id_name.length;
-		// 		var id_name_string = id_name.substring(0,8);// Get what type of submit and delete button it is. 
-		// 		//get the id of the note, and thus the subsequent form 
-		// 		var start_index = id_name.indexOf("-");
-		// 		var form_id = id_name.substring(start_index+1,id_name_length);
-
-
-		// 		if (id_name_string == 'remove_1') 
-		// 		{
-		// 			var object = "#remove_"+form_id;
-		// 			$(object).submit(function()
-		// 			{
-		// 				$.post($(this).attr('action'),$(object).serialize(),function(data)
-		// 				{
-		// 					alert('hello');
-		// 				},"json");
-		// 			// alert(object);
-		// 			})//end of submit 
-		// 		}
-		// 		else if(id_name_string == 'submit_1')
-		// 		{
-		// 			var object = "#add_1_"+form_id;
-
-		// 			$(object).submit(function()
-		// 			{
-		// 				$.post($(this).attr('action'),$(this).serialize(),function(data)
-		// 				{
-		// 					alert(data.message);
-		// 				},"json");
-		// 			// alert(object);
-				
-		// 			});
-		// 		}
-		// 		else if(id_name_string =='submit_2')
-		// 		{
-		// 			var object = "#add_2_"+form_id;
-		// 			$(object).submit(function()
-		// 			{
-		// 				$.post($(this).attr('action'),$(this).serialize(),function(data)
-		// 				{
-		// 					alert(data.message);
-		// 				},"json");
-		// 			// alert(object);
-		// 			});
-		// 		}
-		// 		else
-		// 		{
-		// 			alert('error');
-		// 			return false;
-		// 		}
-		// 		return false;
-		// 	})// end button click 
-		})	// document.ready 	
 	</script>
 
 </head>
@@ -172,43 +150,44 @@
 									<% if @group_notes !=[]%>
 										<%@group_notes.each  do |gn|%> 
 											<% if gn.note_id == note.id%>
+											<div id="form_<%=note.id %>">
 												<form id='remove_<%=note.id %>' action="/groupnotes/delete" method='post'>
 													<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 													<input type='hidden' name='group_note[note_id]' value=<%=note.id %>>
 													<input type='hidden' name='group_note[group_id]' value=<%= @group_id%>>
 													<input type='hidden' name='group_note[user_id]' value=<%=@user.id %>>
 													<input type='hidden' name='group_note[gnote]' value=<%=gn.id %>>
-													<!-- <input type='submit' value='Remove' id='remove_button' class='btn btn-danger'> -->
-													<button id="remove_1-<%= note.id %>" class='btn btn-danger'>Remove</button>
+													<input type='submit' value='Remove' id='remove_button' class='btn btn-danger'>
 												</form>
-												
+											</div>
 										<% end%>
 										<%end %>	
 										
 											<% @all_notes.each do |nn|%>
 												<% if nn == note.id %>
-													<form id='add_1_<%=note.id %>' action="/groupnotes/create" method='post'>
+													<div id="form_<%=note.id %>">
+														<form id='add_1_<%=note.id %>' action="/groupnotes/create" method='post'>
 														<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 														<input type='hidden' name='group_note[note_id]' value=<%=note.id %>>
 														<input type='hidden' name='group_note[group_id]' value=<%= @group_id%>>
 														<input type='hidden' name='group_note[user_id]' value=<%=@user.id %>>
-														<!-- <input type='submit' value='Add' id='submit_1' class='btn btn-success'> -->
-														<button id='submit_1-<%=note.id %>' class='btn btn-success'>Add</button>
+														<input type='submit' value='Add' id='submit_1' class='btn btn-success'>
 													</form>
-													
+												</div>
+												
 												<%end %>
 											<%end %>
 									<%else%>
+									<div id="form_<%=note.id %>">
 										<form id='add_2_<%= note.id%>' action="/groupnotes/create" method='post'>
 											<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 											<input type='hidden' name='group_note[note_id]' value=<%=note.id %>>
 											<input type='hidden' name='group_note[group_id]' value=<%= @group_id%>>
 											<input type='hidden' name='group_note[user_id]' value=<%=@user.id %>>
-											<!-- <input type='submit' value='Add' id='submit_2' class='btn btn-success'> -->
-											<button id='submit_2-<%=note.id %>' class='btn btn-success'>Add</button>
+											<input type='submit' value='Add' id='submit_2' class='btn btn-success'>
 										</form>
-											
-									<% end%>
+									</div>			
+								<% end%>
 								<p class='note_content'><a href='' id="v+<%=note.start_time%>_<%=note.url %>"><%=note.notes %></a></p>
 							</div>
 						<% end%>

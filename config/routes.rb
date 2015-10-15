@@ -1,5 +1,35 @@
 Rails.application.routes.draw do
   
+  get 'your_tags/new'
+
+  get 'your_tags/create'
+
+  get 'your_tags/index'
+
+  get 'your_tags/view'
+
+  get 'your_tags/all'
+
+  get 'tags/share'
+
+  get 'tags/add'
+
+  get 'tags/remove'
+
+  get 'tags/new'
+
+  get 'tags/all'
+
+  get 'tags/unshare'
+
+  get 'saves/create'
+
+  get 'saves/new'
+
+  get 'saves/all'
+
+  get 'saves/show'
+
   get 'note_supports/all'
 
   get 'note_supports/new'
@@ -60,6 +90,11 @@ Rails.application.routes.draw do
     get '/notesupports/group/:group_id/:point_id' => 'note_supports#group';
     match '/note_supports/create' => 'note_supports#create', :via=>[:get,:post];
     match '/groups/delete/:group_id/:user_id' => 'groups#delete', :via=>[:get,:post];
+    match '/tags/share/' => 'tags#share', :via=>[:get,:post]; 
+     get '/tags/unshare/:collection_id' => 'tags#unshare'   
+     get '/tags/add' =>"tags#add"
+     get '/tags/remove'=>"tags#remove"
+    get '/saves/show/:collection_id' => 'saves#show';
     
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

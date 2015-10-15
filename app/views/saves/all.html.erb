@@ -122,6 +122,7 @@
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function(){
+
 			$(".pub_info").hide();
 
 			$("button").click(function(event){
@@ -148,12 +149,12 @@
 					return false;
 				}
 			})
-			$('form').submit(function(){
+		$('form').submit(function(){
 			$.post($(this).attr('action'),$(this).serialize(),function(data){
 				// Hide the form div
 					$("#pub"+data.collection_id).hide();
 				// Change the button
-				$("#pbutton"+data.collection_id).html("<a href='/tags/unshare/"+data.collection_id+"' class='btn btn-link'>UnShare</a>");
+				$("#pbutton"+data.collection_id).html("<a href='/tags/unshare/"+data.collection_id+"'>UnPublish</a>");
 			},"json");
 			return false;
 		})
@@ -165,22 +166,23 @@
 	<h1>All Collections</h1>
 	<a href="/homes/index" id='back'>Home</a>
 	<div id='collection_type'>
-		<p>Your Collections</p>
-		<a href="/saves/all">Subscribed Collections</a>
+		<a href='/collections/all'>Your Collections</a>
+		<p >Subscribed Collections</p>
 	</div>
 	<div id='video_section'>
 		<div id='video'></div>
+
 	</div>
 	<div id='all_collections'>
 		<%@collections.each do |collection| %>
 			<div class='collection'>
 				<div class='upper_options' id="uo_<%=collection.id %>">
-					<h4><a href="/notes/new/<%=collection.id %>" class='title'><%= collection.name%></a></h4>
+					<h4><a href="/saves/show/<%=collection.id %>" class='title'><%= collection.name%></a></h4>
 
 					<div id="pbutton<%=collection.id%>" class='pbutton'>
 						<!-- Unpublish and Publish Button -->
 						<%if collection.share==true %>
-							<a href="/tags/unshare/<%=collection.id%>" class='btn btn-link'>UnShare</a>
+							<a href="/tags/unshare/<%=collection.id%>">Unshare</a>
 						<% else%>
 							<button  id="b_<%=collection.id %>+" class='btn btn-link'>Publish</button>
 						<%end %>
@@ -213,6 +215,7 @@
 			</div>
 
 		<%end %>
+
 	</div>
 </body>
 </html>

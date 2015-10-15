@@ -41,7 +41,10 @@
 			margin-top:20px;
 		}
 		#options{
-			margin-left:200px;
+			margin-left:auto;
+			margin-right:auto;
+			width:300px;
+			margin-top:50px;
 		}
 		#options a{
 			margin:5px;
@@ -55,7 +58,73 @@
 		.error{
 			color:red;
 		}
+		#subscribe_button{
+			margin-left: auto;
+			margin-right:auto;
+			display:block;
+			width:11em;
+		}
+		#subscribe{
+			margin-top:40px;
+		}
+		
+		#subscribe h2{
+			margin-left: auto;
+			margin-right:auto;
+			width:14em;
+		}
+		#stream{
+			margin-left: auto;
+			margin-right:auto;
+			width:30em;	
+			margin-top:30px;
+		}
+		.collection{
+			margin-top:7px;
+		}
+		.collection a{
+			display:inline-block;
+			margin-left:auto;
+			margin-right:auto;
+			width:12em;
+		}
+		.collection button{
+			display:inline-block;
+			margin-left:100px;
+			width:8em;
+		}
 	</style>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#new_note").hide();
+
+			// Add Note/ Remove Note Function
+			$("button").click(function(){
+				var id = $(this).attr("id");
+				if(id !="new_note_button") 
+				{
+				var start_index = id.indexOf("s");
+				var mid_index = id.indexOf("_");
+				var end_index = id.indexOf("+");
+				var collection_id = id.substring(start_index+1, mid_index);
+				var user_id = id.substring(mid_index+1, end_index);
+				$.get("/saves/create",{collection_id:collection_id, user_id:user_id},function(data){
+					if(data.message == 'success'){
+						$("#coll"+data.collection_id).fadeOut();
+					}
+					else{
+						alert("Error");
+					}			
+				})
+				return false;
+				}
+			});
+		});
+
+		$(document).on('click','#new_note_button',function(){
+			$("#new_note").toggle();
+		})
+	</script>
 </head>
 <body>
 	<div id='upper'>
@@ -64,9 +133,9 @@
 	</div>
 	
 	<div id='options'>
+		<button class='btn btn-success' id='new_note_button'>New Note</button>
 		<a href="/collections/all" class='btn btn-success'>Notes</a>
 		<a href="/groups/all" class='btn btn-success'>Groups</a>
-		<a href="/papers/index" class='btn btn-success'>Paper</a>
 	</div>
 	
 
@@ -74,19 +143,33 @@
 		<h2>Add New Notes</h2>
 		<form action='/collections/create' method='post'>
 			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-			<input type='text' name='collection[url]' placeholder='Enter Video Code' class='new_input'>
+			<input type='text' name='collection[url]' placeholder='Enter Youtube Video Code' class='new_input'>
 			<input type='hidden' name='collection[user_id]' value=<%=@user.id%>>
 			<input type='text' name='collection[name]' placeholder='Enter Collection Name' class='new_input'>
 			<input type='submit' value='Submit' class='btn btn-success' id='note_submit'>
 		</form>
 	</div>
-		<div id='messages'>
-			<% if flash[:message]%>
+	<div id='messages'>
+		<% if flash[:message]%>
 			<h4 class='error'>Error:</h4>
 			<% flash[:message].each do |message|%>
 				<p class='error'><%= message%></p>
 			<% end%>
 		<% end%>
+	</div>
+	<div id='subscribe'>
+		<h2>Discover</h2>
+		<a href="/your_tags/new" class='btn btn-info' id='subscribe_button'>Subscribe to Tags</a>
+		<div id='stream'>
+			<%@suggestions.each do |s| %>
+				<%if s.user_id !=@user.id %>
+					<div class='collection' id="coll<%=s.id %>">
+						<a href="/saves/show/<%=s.id %>"><%=s.name %></a>
+						<button class='btn btn-primary' id="s<%=s.id%>_<%=@user.id %>+" >Add to Notes</button>
+					</div>
+				<%end %>
+			<% end%>
 		</div>
+	</div>
 </body>
 </html>

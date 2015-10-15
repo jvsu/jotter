@@ -1,5 +1,7 @@
 class Collection < ActiveRecord::Base
 belongs_to :user
+has_many :saves
+has_many :tags
   validates :name, :user_id, :url, presence:true
   validates :user_id, numericality: true
 

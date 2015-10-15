@@ -15,7 +15,10 @@
 			width:1400px;
 		}
 		#video_container{
-			display:inline-block;
+			display:block;
+			margin-left: auto;
+			margin-right:auto;
+			width:40em;
 		}
 		#nav h2{
 			display:inline-block;
@@ -42,21 +45,19 @@
 			display:inline-block;
 			width:100px;
 		}
-		#video_container h2{
-			text-transform: capitalize;
-		}
 		#ts{
 			display:block;
 			margin-left:70px;
 			margin-top:5px;
 			margin-bottom:5px;
 		}
+		
 
 		#new_notes{
 			display:inline-block;
 			vertical-align: top;
 			border:1px solid #E8E8E8;
-			margin-left:50px;
+			margin-left:70px;
 			margin-top:60px;
 		}
 		#new_notes textarea{
@@ -94,11 +95,6 @@
 		.note_time{
 			display:block;
 		}
-		#top_container{
-			margin-left: auto;
-			margin-right:auto;
-			width:100em;
-		}
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -125,7 +121,7 @@
 					var start_time = id_name.substring(st_index_start+1,st_index_end);
 					var last_index = id_name.length
 					var video_code = id_name.substring(st_index_end+1,last_index)
-					$("#video").html("<iframe id='ytplayer' type='text/html' width='640' height='390' src=https://www.youtube.com/embed/"+video_code+"?autoplay=1&start="+start_time+"></iframe>");
+					$("#video").html("<iframe id='ytplayer' type='text/html' width='640' height='390' src=http://www.youtube.com/embed/"+video_code+"?autoplay=1&start="+start_time+"></iframe>");
 					return false;
 				}
 			})
@@ -141,14 +137,14 @@
 					var start_time = id_name.substring(st_index_start+1,st_index_end);
 					var last_index = id_name.length
 					var video_code = id_name.substring(st_index_end+1,last_index)
-					$("#video").html("<iframe id='ytplayer' type='text/html' width='640' height='390' src=https://www.youtube.com/embed/"+video_code+"?autoplay=1&start="+start_time+"></iframe>");
+					$("#video").html("<iframe id='ytplayer' type='text/html' width='640' height='390' src=http://www.youtube.com/embed/"+video_code+"?autoplay=1&start="+start_time+"></iframe>");
 					return false;
 				}
 		});
 	</script>
 </head>
 <body>
-	<div id='nav'>
+		<div id='nav'>
 		<h1>Jot</h1>
 		<a href="/homes/index">Home</a>
 		<a href="/collections/all">Collections</a>
@@ -159,27 +155,9 @@
 		<div id='video_container'>
 			<h2><%=@collection.name %></h2>
 			<div id='video'>
-				<iframe id="ytplayer" type="text/html" width="640" height="390" src="https://www.youtube.com/embed/<%=@collection.url%>?autoplay=1"></iframe>
+				<iframe id="ytplayer" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/<%=@collection.url%>?autoplay=1"></iframe>
 			</div>
 		</div>
-		
-		<div id='new_notes'>
-			<h4>New Note</h4>
-			<form action='/notes/create' method='post' id='note'>
-				<div id='ts'>
-					<input type='number' name='note[start_timeh]' placeholder='Enter Hour' id='time_stamph'>
-					: <input type='number' name='note[start_time1]' placeholder='Enter Minutes' id='time_stamp1'> 
-					: <input type='number' name='note[start_time2]' placeholder='Enter Seconds' id='time_stamp2'>
-				</div>
-				<input type='hidden' name='note[user_id]' value=<%=@user.id %>>
-				<textarea name='note[notes]' placeholder='Enter New Note'></textarea>
-				<input type='hidden' name='note[url]' value=<%=@collection.url%>>
-				<input type='hidden' name='note[collection_id]' value=<%=@collection.id%>>
-				<input type='submit' value='Submit' id='submit_note' class='btn btn-success'>
-			</form>
-		</div>
-	</div>
-
 
 	<div id='notes_flow'>
 		<% @existing_notes.each do |note|%>
@@ -190,7 +168,6 @@
 			</div>
 		<% end%>	
 	</div>
-
 </div>
 
 </body>
