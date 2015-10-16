@@ -162,7 +162,6 @@
 	<div id='notes_flow'>
 		<% @existing_notes.each do |note|%>
 			<div class='note'>
-				<a href="/notes/retrieve/<%=note.id%>">Note View</a>
 				<p class='note_time'><%=note.time_stamp_h %> H <%=note.time_stamp_m %> M <%=note.time_stamp_s%> S </p>
 				<a class='note_content' href='' id="v+<%=note.start_time%>_<%=note.url %>"><%=note.notes %></a>
 			</div>

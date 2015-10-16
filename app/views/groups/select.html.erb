@@ -70,6 +70,12 @@
 		.note_content{
 			margin-left:15px;
 		}
+		#sub_notes{
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			width:18em;
+		}
 
 	</style>
 	<script type="text/javascript">
@@ -128,14 +134,14 @@
 		},"json");
 		return false;
 	})
-		
-
 	</script>
 
 </head>
 <body>
 	<h2>Your Notes</h2>
+
 	<a href="/groups/view/<%=@group_id %>" id='back'>Back</a>
+	<a href="/saves/select/<%=@group_id %>" id='sub_notes'>Subscribed Notes</a>
 	<% if flash[:message]%>
 		<p><%=flash[:message]%></p>
 	<% end%>

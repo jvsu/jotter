@@ -5,6 +5,7 @@ class HomesController < ApplicationController
 		@user = User.find(session[:user_id])
 		@collections = Collection.all.where(:user_id=>@user.id)  
 
+
 		# get your tags
 			your_tags = YourTag.all.where(user_id:session[:user_id])
 		

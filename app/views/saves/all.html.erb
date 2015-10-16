@@ -173,21 +173,15 @@
 		<div id='video'></div>
 
 	</div>
+	<%if flash[:message] %>
+		<p><%=flash[:message] %></p>
+	<% end%>
 	<div id='all_collections'>
 		<%@collections.each do |collection| %>
 			<div class='collection'>
 				<div class='upper_options' id="uo_<%=collection.id %>">
 					<h4><a href="/saves/show/<%=collection.id %>" class='title'><%= collection.name%></a></h4>
-
-					<div id="pbutton<%=collection.id%>" class='pbutton'>
-						<!-- Unpublish and Publish Button -->
-						<%if collection.share==true %>
-							<a href="/tags/unshare/<%=collection.id%>">Unshare</a>
-						<% else%>
-							<button  id="b_<%=collection.id %>+" class='btn btn-link'>Publish</button>
-						<%end %>
-					</div>
-					<a href="/collections/destroy/<%=collection.id %>" class='delete'>Delete</a>
+					<a href="/saves/destroy/<%=collection.id %>/<%=@user.id %>" class='delete'>Delete</a>
 				</div>
 				<div id="pub<%=collection.id %>" class='pub_info'>
 					<form action='/tags/share' method='post'>
@@ -203,7 +197,6 @@
 							<div class='jot'>
 								<div class='jot_info'>
 									<p class='time'>Time: <%=note.time_stamp_h%>H <%=note.time_stamp_m%> M <%= note.time_stamp_s%> S</p>
-									<a href="/notes/retrieve/<%=note.id %>">Edit</a>
 									<button id='v+<%=note.start_time%>_<%=note.url %>' class='btn btn-link'>Play</button>
 								</div>
 								<p class='note_content'><%=note.notes %></p>

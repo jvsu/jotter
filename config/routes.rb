@@ -78,6 +78,7 @@ Rails.application.routes.draw do
     match '/groups/create/' => 'groups#create', :via=>[:get,:post];
     get '/groups/view/:group_id' => 'groups#view';
     get '/groups/select/:group_id' => 'groups#select';
+    get '/saves/select/:group_id' => 'saves#select';
     match '/groups/all/' => 'groups#all', :via=>[:get,:post];
     match '/groupnotes/create/' => 'group_notes#create', :via=>[:get,:post];
     match '/groupnotes/delete/' => 'group_notes#delete', :via=>[:get,:post];
@@ -95,6 +96,7 @@ Rails.application.routes.draw do
      get '/tags/add' =>"tags#add"
      get '/tags/remove'=>"tags#remove"
     get '/saves/show/:collection_id' => 'saves#show';
+    get '/saves/destroy/:collection_id/:user_id' =>'saves#destroy'
     
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
