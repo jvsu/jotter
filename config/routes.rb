@@ -60,8 +60,9 @@ Rails.application.routes.draw do
   get 'papers/all'
 
   get 'papers/view'
+    get 'sessions/home'
 
-    root to: "sessions#index"
+    root to: "sessions#home"
     match '/sessions/index'=>'sessions#index', :via=>[:get,:post]
     match '/sessions/sign_up'=>'sessions#sign_up', :via=>[:get,:post]
     match '/sessions/sign_in'=>'sessions#sign_in', :via=>[:get,:post]

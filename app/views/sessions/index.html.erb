@@ -55,9 +55,14 @@
 			margin-left:auto;
 			margin-right:auto;
 		}
+		#home{
+			float:right;
+			margin-right:150px;
+		}
 	</style>
 </head>
 <body>
+	<a href="/sessions/home" id='home' class="btn btn-success">Home</a>
 	<h1>JOT</h1>
 	<% if flash[:message]%>
 		<p class='error_messages'><%=flash[:message] %></p>
