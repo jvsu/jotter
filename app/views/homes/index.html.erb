@@ -134,7 +134,7 @@
 	
 	<div id='options'>
 		<button class='btn btn-success' id='new_note_button'>New Note</button>
-		<a href="/collections/all" class='btn btn-success'>Notes</a>
+		<a href="/collections/all" class='btn btn-success'>Collection</a>
 		<a href="/groups/all" class='btn btn-success'>Groups</a>
 	</div>
 	
@@ -149,14 +149,7 @@
 			<input type='submit' value='Submit' class='btn btn-success' id='note_submit'>
 		</form>
 	</div>
-	<div id='messages'>
-		<% if flash[:message]%>
-			<h4 class='error'>Error:</h4>
-			<% flash[:message].each do |message|%>
-				<p class='error'><%= message%></p>
-			<% end%>
-		<% end%>
-	</div>
+	
 	<div id='subscribe'>
 		<h2>Discover</h2>
 		<a href="/your_tags/new" class='btn btn-info' id='subscribe_button'>Subscribe to Tags</a>
