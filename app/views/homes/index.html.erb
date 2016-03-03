@@ -2,97 +2,7 @@
 <head>
 	<title></title>
 	<style type="text/css">
-		#upper a{
-			float:right;
-			width:50px;
-			margin-right:100px;
-
-		}
-		#new_note input{
-			display:block;
-		}
-		.new_input{
-			width:200px;
-			height:40px;
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-		}
-		#new_note h2{
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-			width:230px;
-		}
-		#new_note{
-			margin-top:50px;
-		}
-		#note_submit{
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-			margin-top:5px;
-		}
-		#upper h1{
-			width:140px;
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-			margin-top:20px;
-		}
-		#options{
-			margin-left:auto;
-			margin-right:auto;
-			width:300px;
-			margin-top:50px;
-		}
-		#options a{
-			margin:5px;
-		}
-		#messages{
-			width:150px;
-			margin-left:auto;
-			margin-right:auto;
-			margin-top:20px;
-		}
-		.error{
-			color:red;
-		}
-		#subscribe_button{
-			margin-left: auto;
-			margin-right:auto;
-			display:block;
-			width:11em;
-		}
-		#subscribe{
-			margin-top:40px;
-		}
-		
-		#subscribe h2{
-			margin-left: auto;
-			margin-right:auto;
-			width:14em;
-		}
-		#stream{
-			margin-left: auto;
-			margin-right:auto;
-			width:30em;	
-			margin-top:30px;
-		}
-		.collection{
-			margin-top:7px;
-		}
-		.collection a{
-			display:inline-block;
-			margin-left:auto;
-			margin-right:auto;
-			width:12em;
-		}
-		.collection button{
-			display:inline-block;
-			margin-left:100px;
-			width:8em;
-		}
+	
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -129,7 +39,7 @@
 <body>
 	<div id='upper'>
 		<h1>JOT</h1>
-		<a href="/sessions/destroy">Logoff</a>
+		<a href="/sessions/destroy" id='logoff'>Logoff</a>
 	</div>
 	
 	<div id='options'>

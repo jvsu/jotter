@@ -1,3 +1,122 @@
 // Place all the styles related to the Notes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+	h1{
+		padding:15px;
+		color:white;
+		margin-top:0px;
+		width:140px;
+		margin-left: auto;
+		margin-right:auto;
+		}
+
+		#vid_notes_tool{
+			display:block;
+			margin-left: auto;
+			margin-right:auto;
+			width:1400px;
+			margin-top:20px;
+		}
+		#video_container{
+			display:inline-block;
+			margin-left:70px;
+		}
+		#nav{
+			background-color: #55acee;
+			margin-top:0px;
+			padding-top:0px;
+		}
+		#nav h2{
+			display:inline-block;
+			width:500px;
+		}
+		#nav a{
+			display: inline-block;
+			width:100px;
+			float:right;
+		}
+		#notes_flow{
+			display:block;
+			height:350px;
+			border:1px dashed #909090;
+			vertical-align: top;
+			margin-bottom:10px;
+			margin-top:10px;
+			overflow-x: scroll;
+   		    overflow-y: hidden;
+    		white-space:nowrap
+
+
+		}
+		#time_stamp1, #time_stamp2, #time_stamph{
+			display:inline-block;
+			width:100px;
+		}
+		 #notes_header{
+			text-transform: capitalize;
+			text-align:center;
+		}
+		#ts{
+			display:block;
+			margin-left:70px;
+			margin-top:5px;
+			margin-bottom:5px;
+		}
+
+		#new_notes{
+			display:inline-block;
+			vertical-align: top;
+			border:1px solid #E8E8E8;
+			margin-left:50px;
+		}
+		#new_notes textarea{
+			width:500px;
+			height:300px;
+			border:1px solid #E8E8E8;
+		}
+		#submit_note{
+			display:block;
+			width:100px;
+			margin-left: auto;
+			margin-right:auto;
+			margin-bottom:5px;
+			margin-top:10px;
+		}
+		#new_notes h4{
+			display:block;
+			width:150px;
+			margin-right:auto;
+			margin-left:auto;
+		}
+		.note{
+			height:300px;
+			width:310px;
+			border:1px solid #909090;
+			display:inline-block;
+			vertical-align: top;
+			margin:5px;
+			overflow-y:scroll;
+			overflow-x:hidden;
+			white-space:normal;
+			margin-top:20px;
+		}
+		.note p{
+			margin:5px;
+		}
+		.note_time{
+			display:block;
+		}
+		#top_container{
+			margin-left: auto;
+			margin-right:auto;
+			width:100em;
+		}
+		h3{
+			text-align:center;
+		}
+	
+		#data{
+			border:1px dashed #909090;
+			margin-bottom:50px;
+		}

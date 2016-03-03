@@ -109,9 +109,11 @@
 	</script>
 </head>
 <body>
-	<h1>JOT</h1>
-	<a href="/notes/new/<%=@note.collection_id%>" id='back'>Back</a>
-	<h3>Note View</h3>
+	<div id='upper_nav'>
+		<h1>JOT</h1>
+		<%= link_to 'Back', :back, :class=>"back" %>
+	</div>
+		<h3>Note View</h3>
 
 	<iframe id="ytplayer" type="text/html" width="640" height="390" src="https://www.youtube.com/embed/<%=@note.url%>?autoplay=1&start=<%=@note.start_time%>+"></iframe>
 	<h3><%=@note.collection.name %></h3>
@@ -122,8 +124,9 @@
 			<a href="/notes/destroy/<%=@note.id%>/<%=@note.collection_id%>">Delete</a>
 		</div>
 		
-		<p id='note'><%=@note.notes%></p>
+		<p id='note_to_edit'><%=@note.notes%></p>
 		<div id='edit'>
+			<h5>Time:</h5>
 			<form id='edit_time_form' action='/notes/update' method='post'>
 				<div id='ts'>
 					<input type='number' name='note[start_timeh]' placeholder="<%=@note.time_stamp_h %>" id='time_stamph'>
@@ -134,6 +137,7 @@
 				</div>
 					<input type='submit' value='Submit' id='edit_note_time' class='btn btn-success'>
 			</form>
+			<h5>Edit Note:</h5>
 			<form id='edit_note' action='/notes/update' method='post'>
 				<textarea name='note[notes]' id='text_note'><%=@note.notes%></textarea>
 				<input type='hidden' name='note[note_id]' value=<%=@note.id %>>

@@ -2,70 +2,25 @@
 <head>
 	<title>SignUp or Login</title>
 	<style type="text/css">
-		#sign_up_input input{
-			display:block;
-			width:200px;
-			height:40px;
-		}
-
-		#sign_up{
-			width:400px;
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-			margin-top:50px;
-		}
-
-		#login input{
-			display:block;
-		}
-		#login{
-			width:400px;
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-			margin-top:50px;
-		}
-
-		#sign_up_sub{
-			margin-left:50px;
-			margin-top:10px;
-		}
-		#login_sub{
-			margin-left:50px;
-			margin-top:10px;			
-		}
-		.btn.btn-info{
-			display:block;
-			margin-left:50px;
-			margin-top:7px;
-		}
-		#log_in_input input{
-			display:block;
-			width:200px;
-			height:40px;
-		}
-		.error_messages{
-			color:red;
-			display:inline-block;
-			margin:10px;
-		}
-		h1{
-			width:300px;
-			margin-left:auto;
-			margin-right:auto;
-		}
-		#home{
-			float:right;
-			margin-right:150px;
-		}
+	
 	</style>
 </head>
 <body>
-	<a href="/sessions/home" id='home' class="btn btn-success">Home</a>
-	<h1>JOT</h1>
+	<div class='upper_nav'>
+		<a href="/sessions/home" id='home' class="btn btn-success">Home</a>
+		<h1>JOT</h1>
+	</div>
+	
+	<% if flash[:su_message]%>
+		<%flash[:su_message].each do |f| %>
+			<p class='error_messages'><%=f%></p>
+		<% end%>
+	<%end %>
+	<% if flash[:login_message]%>
+			<p class='error_messages'><%=flash[:login_message]%></p>
+	<%end %>
 	<% if flash[:message]%>
-		<p class='error_messages'><%=flash[:message] %></p>
+			<p class='error_messages'><%=flash[:message]%></p>
 	<%end %>
 	<div id='sign_up'>
 		<h3>Sign Up</h3>

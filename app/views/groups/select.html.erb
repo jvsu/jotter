@@ -2,63 +2,6 @@
 <head>
 	<title></title>
 	<style type="text/css">
-		.notes{
-			overflow-x: scroll;
-    		overflow-y: hidden;
-   		 	white-space: nowrap;
-		}
-		.jot{
-			height:300px;
-			width:300px;
-			border:1px solid #D8D8D8;
-			display:inline-block;
-			vertical-align: top;
-			margin:5px;
-			overflow-y:scroll;
-			overflow-x:hidden;
-			white-space:normal;
-		}
-		#remove_button{
-			width:70px;
-			height:30px;
-			padding:5px;
-		}
-		#submit_1, #submit_2{
-			width:70px;
-			height:30px;
-			padding:5px;
-		}
-			h2{
-			text-transform: capitalize;
-			width:280px;
-			margin-right: auto;
-			margin-left:auto;
-		}
-		#back{
-			float:right;
-			margin-right:100px;
-		}
-		#video{
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-			width:650px;
-		}
-		#all_collections{
-			height:1000px;
-			overflow-y:scroll;
-			overflow-x:hidden;
-			margin-top:50px;
-		}
-		.btn.btn-danger{
-			width:70px;
-			height:22px;
-			padding:1px;
-			margin-left:150px;
-			margin-top:10px;
-			margin-bottom:10px;
-		}
-
 		.btn.btn-success{
 			width:70px;
 			height:22px;
@@ -67,16 +10,8 @@
 			margin-top:10px;
 			margin-bottom:10px;
 		}
-		.note_content{
-			margin-left:15px;
-		}
-		#sub_notes{
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-			width:18em;
-		}
-
+		
+	
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -138,17 +73,22 @@
 
 </head>
 <body>
-	<h2>Your Notes</h2>
+	<div id='upper_nav'>
+		<h1>Your Notes</h1>
+		<a href="/groups/view/<%=@group_id %>" id='back'>Back</a>
+	</div>
 
-	<a href="/groups/view/<%=@group_id %>" id='back'>Back</a>
+
+
 	<% if flash[:message]%>
 		<p><%=flash[:message]%></p>
 	<% end%>
 	<div id='video'></div>
 	<div id='all_collections'>
 		<% @collections.each do |collection|%>
+		<h4><%= collection.name%></h4>
 			<div class='notes'>
-				<h4><%= collection.name%></h4>
+				
 					<%@notes.each do |note| %>
 						<%if note.collection_id == collection.id %>
 							<div class='jot'>

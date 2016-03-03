@@ -1,3 +1,201 @@
 // Place all the styles related to the Groups controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap";
+
+.group{
+			width:250px;
+			height:250px;
+			border:1px solid #D8D8D8;
+			display:inline-block;
+			margin:6px;
+			vertical-align:top;
+		}
+		.delete{
+			width:20px;
+			height:20px;
+			margin-left: 200px;
+		}
+
+		#all_groups{
+			margin:10px;
+		}
+		h2{
+			text-align:center;
+			text-transform:capitalize;
+		}
+		#back{
+			width:60px;
+			float:right;
+			display:block;
+			margin-right:100px;
+		}
+		#name{
+			width:310px;
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			height:40px;
+		}
+		#sub{
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			width:100px;
+			margin-top:10px;
+		}
+		#group_name{
+			text-transform: capitalize;
+		}
+		.group_name{
+			text-transform: capitalize;
+			margin-left:10px;
+			padding:7px;
+
+		}
+		#flash_message{
+			margin-left:15px;
+		}
+		h1{
+			text-align: center;
+			padding:15px;
+			color:white;
+			margin-top:0px;
+		}
+		#upper_nav{
+			background-color: #55acee;
+			margin-top:0px;
+			padding-top:0px;
+		}
+	.content{
+		  	background-color:#fafafa;
+		    width:100%;
+		    margin:0px;
+		    padding:0px;
+		    height:100%;
+		    max-height:100%;
+		    overflow: auto;
+		}
+		html, body {
+    	  height: 100%;
+   		  background-color: #fafafa;
+		}
+
+	#new_group{
+		width:350px;
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	#group_name_view{
+		text-align:center;
+		display:block;
+	}
+	.btn.btn-success{
+			width:200px;
+			height:40px;
+			padding:10px;
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			margin-top:30px;
+		}
+		#back{
+			float:right;
+			margin-right:100px;
+		}
+		h3{
+			margin-left:20px;
+		}
+		.note{
+			width:250px;
+			height:250px;
+			border: 1px solid #B0B0B0;
+			display:inline-block;
+			vertical-align: top;
+			margin:5px;
+			overflow-y:scroll;
+			overflow-x:hidden;
+			white-space:normal;
+		}
+		#remove{
+			display:block;
+			float:bottom;
+		}
+		.btn.btn-danger{
+			width:70px;
+			height:22px;
+			padding:1px;
+			margin-left:150px;
+			margin-top:10px;
+			margin-bottom:10px;
+		}
+		.note p{
+			display:block;
+		}
+		#ytplayer{
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		#current_notes{
+			height:900px;
+			overflow-y:scroll;
+			overflow-x:hidden;
+			margin-bottom:50px;
+		}
+		.notes{
+			overflow-x: scroll;
+    		overflow-y: hidden;
+   		 	white-space: nowrap;
+		}
+		.jot{
+			height:300px;
+			width:300px;
+			border:1px solid #D8D8D8;
+			display:inline-block;
+			vertical-align: top;
+			margin:5px;
+			overflow-y:scroll;
+			overflow-x:hidden;
+			white-space:normal;
+		}
+			#remove_button{
+			width:70px;
+			height:30px;
+			padding:5px;
+		}
+		#submit_1, #submit_2{
+			width:70px;
+			height:30px;
+			padding:5px;
+		}
+		
+	
+		#video{
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			width:650px;
+		}
+		#all_collections{
+			height:1000px;
+			overflow-y:scroll;
+			overflow-x:hidden;
+			margin-top:50px;
+		}
+		
+		
+		.note_content{
+			margin-left:15px;
+		}
+		#sub_notes{
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			width:18em;
+		}
+		h4{
+			text-align:center;
+		}

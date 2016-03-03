@@ -3,3 +3,127 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import "bootstrap";
+
+		p{
+			width: 800px;
+			display:block;
+			margin-left: auto;
+			margin-right:auto;
+			margin-top:25px;
+		}
+		h1{
+			width:140px;
+			margin-left: auto;
+			margin-right:auto;
+			padding:15px;
+			color:white;
+			margin-top:0px;
+
+		}
+		.upper_nav{
+			background-color: #55acee;
+			margin-top:0px;
+			padding-top:0px;
+		}
+		#links{
+			width:800px;
+			margin-left: auto;
+			margin-right:auto;
+		}
+		.link{
+			margin-left: auto;
+			margin-right:auto;
+			width:300px;
+			margin-top:10px;
+		}
+		
+		h4{
+			width:250px;
+			margin-left: auto;
+			margin-right:auto;
+		}
+
+		#session{
+			float:right;
+			margin-right:150px;
+			margin-top:10px;
+		}
+
+		#walkthrough{
+			margin-right:auto;
+			margin-left:auto;
+			display:block;
+			width:580px;
+			margin-top:20px;
+			margin-bottom:20px;
+		}
+		#sign_up_input input{
+			display:block;
+			width:200px;
+			height:40px;
+		}
+
+		#sign_up{
+			width:150px;
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			margin-top:50px;
+		}
+
+		#login input{
+			display:block;
+		}
+		#login{
+			width:150px;
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			margin-top:50px;
+		}
+
+		#sign_up_sub{
+			margin-left:50px;
+			margin-top:10px;
+		}
+		#login_sub{
+			margin-left:50px;
+			margin-top:10px;			
+		}
+		.btn.btn-info{
+			display:block;
+			margin-left:50px;
+			margin-top:7px;
+		}
+		#log_in_input input{
+			display:block;
+			width:200px;
+			height:40px;
+		}
+		.error_messages{
+			color:white;
+			text-align:center;
+			background-color:red;
+			padding:8px;
+		}
+		h1{
+			text-align: center;
+			}
+		#home{
+			float:right;
+			margin-right:150px;
+			margin-top:10px;
+		}
+		.content{
+		  	background-color:#fafafa;
+		    width:100%;
+		    margin:0px;
+		    padding:0px;
+		    height:100%;
+		    max-height:100%;
+		    overflow: auto;
+		}
+		html, body {
+    	  height: 100%;
+   		  background-color: #fafafa;
+		}

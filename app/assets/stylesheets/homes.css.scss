@@ -1,3 +1,113 @@
 // Place all the styles related to the Homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+
+	#upper{
+		background-color: #55acee;
+		margin-top:0px;
+		padding-top:0px;
+	}
+	#logoff{
+		float:right;
+		margin-right:100px;
+	}
+	.content{
+		  	background-color:#fafafa;
+		    width:100%;
+		    margin:0px;
+		    padding:0px;
+		    height:100%;
+		    max-height:100%;
+		    overflow: auto;
+		}
+		html, body {
+    	  height: 100%;
+   		  background-color: #fafafa;
+		}
+		#new_note input{
+			display:block;
+		}
+		.new_input{
+			width:200px;
+			height:40px;
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		#new_note h2{
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			width:230px;
+		}
+		#new_note{
+			margin-top:50px;
+		}
+		#note_submit{
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			margin-top:5px;
+		}
+		h1{
+			padding:15px;
+			color:white;
+			margin-top:0px;
+			width:140px;
+			margin-left: auto;
+			margin-right:auto;
+		}
+		#options{
+			margin-left:auto;
+			margin-right:auto;
+			width:300px;
+			margin-top:50px;
+		}
+		#options a{
+			margin:5px;
+		}
+		#messages{
+			width:150px;
+			margin-left:auto;
+			margin-right:auto;
+			margin-top:20px;
+		}
+		.error{
+			color:red;
+		}
+		#subscribe_button{
+			margin-left: auto;
+			margin-right:auto;
+			display:block;
+			width:11em;
+		}
+		#subscribe{
+			margin-top:40px;
+		}
+		
+		#subscribe h2{
+			margin-left: auto;
+			margin-right:auto;
+			width:14em;
+		}
+		#stream{
+			margin-left: auto;
+			margin-right:auto;
+			width:30em;	
+			margin-top:30px;
+		}
+		.collection{
+			margin-top:7px;
+		}
+		.collection a{
+			display:inline-block;
+			margin-left:auto;
+			margin-right:auto;
+			width:12em;
+		}
+		.collection button{
+			display:inline-block;
+			margin-left:100px;
+			width:8em;
+		}

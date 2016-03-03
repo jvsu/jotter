@@ -1,73 +1,7 @@
 <html>
 <head>
 	<title></title>
-	<style type="text/css">
-		h1{
-			width:70px;
-			margin-left:auto;
-			margin-right:auto;
-		}	
-
-		h2{
-			text-transform: capitalize;
-			width:280px;
-			margin-left:100px;
-			margin-bottom:25px;
-		}
-		.btn.btn-success{
-			width:200px;
-			height:40px;
-			padding:10px;
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-			margin-top:30px;
-		}
-		#back{
-			float:right;
-			margin-right:100px;
-		}
-		h3{
-			margin-left:20px;
-		}
-		.note{
-			width:250px;
-			height:250px;
-			border: 1px solid #F8F8F8;
-			display:inline-block;
-			vertical-align: top;
-			margin:5px;
-			overflow-y:scroll;
-			overflow-x:hidden;
-			white-space:normal;
-		}
-		#remove{
-			display:block;
-			float:bottom;
-		}
-		.btn.btn-danger{
-			width:70px;
-			height:22px;
-			padding:1px;
-			margin-left:150px;
-			margin-top:10px;
-			margin-bottom:10px;
-		}
-		.note p{
-			display:block;
-		}
-		#ytplayer{
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-		}
-		#current_notes{
-			height:900px;
-			overflow-y:scroll;
-			overflow-x:hidden;
-			margin-bottom:50px;
-		}
-	</style>
+	
 
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -90,14 +24,16 @@
 	</script>
 </head>
 <body>
-	<h1>Jot</h1>
+	<div id='upper_nav'>
+		<h1>Jot</h1>
+		<a href="/groups/all" id='back'>Back</a>
+	</div>
 	
-	<a href="/groups/all" id='back'>Back</a>
 	<a href="/groups/select/<%=@group.id%>" class='btn btn-success'>Add Note</a>
 	
 <!-- 	<h3>Current Notes</h3> -->
+	<h2 id='group_name_view'><%=@group.name %></h2>
 	<div id='player'>
-		<h2><%=@group.name %></h2>
 		<div id='video'></div>
 	</div>
 		<% if flash[:message]%>

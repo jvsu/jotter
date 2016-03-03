@@ -2,69 +2,6 @@
 <head>
 	<title>Groups</title>
 
-	<style type="text/css">
-		.group{
-			width:250px;
-			height:250px;
-			border:1px solid #D8D8D8;
-			display:inline-block;
-			margin:6px;
-			vertical-align:top;
-		}
-		.delete{
-			width:20px;
-			height:20px;
-			margin-left: 200px;
-		}
-
-		#all_groups{
-			margin:10px;
-		}
-		h2{
-			width:460px;
-			margin-left:auto;
-			margin-right:auto;
-		}
-		#back{
-			width:60px;
-			float:right;
-			display:block;
-			margin-right:100px;
-		}
-		#name{
-			width:310px;
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-			height:40px;
-		}
-		#sub{
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-			width:100px;
-			margin-top:10px;
-		}
-		#group_name{
-			text-transform: capitalize;
-		}
-		.group_name{
-			text-transform: capitalize;
-			margin-left:10px;
-			padding:7px;
-
-		}
-		#flash_message{
-			margin-left:15px;
-		}
-		h1{
-			margin-bottom:30px;
-			margin-right: auto;
-			margin-left:auto;
-			width:300px;
-		}
-
-	</style>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#new_group_form").submit(function(){
@@ -86,10 +23,15 @@
 	</script>
 </head>
 <body>
-	<h1>Jot</h1>
+	<div id='upper_nav'>
+		<h1>JOT</h1>
+		<a href="/homes/index" id='back'>Back</a>
+	</div>
+
+	
+
 	<div id='new_group'>
 		<h2>Create New Group</h2>
-		<a href="/homes/index" id='back'>Back</a>
 		<form action='/groups/create' method='post' id='new_group_form'>
 			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 			<input type='text' name='group[name]' placeholder='Enter Name' id='name'>

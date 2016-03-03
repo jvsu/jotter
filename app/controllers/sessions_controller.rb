@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
   		session[:user_id] = @user.id
   		redirect_to '/homes/index'
   	else
-  		flash[:message]= 'Email or Password Not Correct'
+  		flash[:login_message]= 'Email or Password Not Correct'
   		redirect_to '/sessions/index'
   	end
   end
@@ -24,9 +24,25 @@ class SessionsController < ApplicationController
   		session[:user_id] = @user.id
   		redirect_to "/homes/index"
   	else
-  
-  		flash[:message] = @user.errors.full_messages
-  		redirect_to "/sessions/index"
+    
+      #if 'password can't be blank' shows up 
+      errors = @user.errors.full_messages
+      blank_password_count = errors.count("Password can't be blank")
+
+      if blank_password_count >1
+        #remove extra message prompt around 
+        errors.slice!(errors.index("Password can't be blank"))
+        flash[:su_message]= errors
+        redirect_to "/sessions/index"
+      else
+        
+        flash[:su_message]= errors
+        redirect_to "/sessions/index"
+      end
+      # render json:@user.errors.full_messages
+
+  		# flash[:message] = @user.errors.full_messages
+  		# redirect_to "/sessions/index"
   	end
   end
 
