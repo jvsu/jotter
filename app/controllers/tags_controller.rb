@@ -3,19 +3,7 @@ class TagsController < ApplicationController
   def share
     string = tag_params[:tag_name]
     # split string into an array
-    array = string.split(' ')
-    
-    #goes through the array and add the tag names with hash tags
-    array.each do |a|
-      if a[0]=='#' && a.length >1
-        a.slice!(0)
-        a.downcase!
-        tag = Tag.new(tag_name:a,collection_id:tag_params[:collection_id]).save
-      end
-    end
-
-    #publish by setting the share field to true on the collection table
-    collection = Collection.find(tag_params[:collection_id]).update(share:true)
+    share_collection = Tag.share(string,tag_params[:collection_id])
     json_data = {collection_id:tag_params[:collection_id]}
     render json:json_data
 

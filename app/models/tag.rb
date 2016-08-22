@@ -44,4 +44,23 @@ class Tag < ActiveRecord::Base
 	return collection_tags
 
   end
+
+def self.share(string,collection_id)
+	array = string.split(' ')
+    
+    #goes through the array and add the tag names with hash tags
+    array.each do |a|
+      if a[0]=='#' && a.length >1
+        a.slice!(0)
+        a.downcase!
+        tag = Tag.new(tag_name:a,collection_id:collection_id).save
+      end
+    end
+
+    #publish by setting the share field to true on the collection table
+    collection = Collection.find(collection_id).update(share:true)
+
+
+end
+
 end
