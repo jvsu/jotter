@@ -28,7 +28,7 @@ class Note < ActiveRecord::Base
 	      time1_int = time1.to_i 
 	      time2_int = time2.to_i
 	      time_stamp = (time_h_int *3600) + (time1_int *60)+ time2_int
-	  		time_info ={time_stamp:time_stamp, time_h:time_h_int, time_m:time1_int,time_s:time2_int}
+	  	time_info ={time_stamp:time_stamp, time_h:time_h_int, time_m:time1_int,time_s:time2_int}
 		 return time_info
 	else
 		return false

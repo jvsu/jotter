@@ -11,7 +11,6 @@ class NotesController < ApplicationController
 
     if time_info !=false
       #create new note
-
       note = Note.new(url:note_params[:url], user_id:note_params[:user_id],start_time:time_info[:time_stamp], time_stamp_h:time_info[:time_h], time_stamp_m:time_info[:time_m],time_stamp_s:time_info[:time_s], notes:note_params[:notes], collection_id:note_params[:collection_id])
         if note.save
           json_data = {success:'true',time:time_info[:time_stamp], note_id:note.id,start_timeh:note_params[:start_timeh] ,url:note_params[:url], user_id:note_params[:user_id],start_time1:note_params[:start_time1], start_time2:note_params[:start_time2], notes:note_params[:notes], collection_id:note_params[:collection_id]}
@@ -54,7 +53,6 @@ class NotesController < ApplicationController
         json_data = {message:'success',notes:note}
         render json:json_data
     end
-  
   end
 
   def destroy
