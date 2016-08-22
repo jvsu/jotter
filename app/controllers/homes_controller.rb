@@ -7,7 +7,9 @@ class HomesController < ApplicationController
 		collection_tags = Tag.collection_tag(session[:user_id])
 		@suggestions = Collection.find(collection_tags)
   	else
-  		
+		flash[:message]= "You Must Login or SignUp"
+  		redirect_to "/sessions/index"
   	end
   end
+
 end
