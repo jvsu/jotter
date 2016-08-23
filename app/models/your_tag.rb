@@ -16,7 +16,6 @@ class YourTag < ActiveRecord::Base
     #remove duplicates in an array
     tags_array = tags_array.uniq
 
-  
     #Get my_tags... tags that belong to you
 
     mtags = YourTag.all.where(user_id:user_id)
