@@ -1,124 +1,49 @@
 <html>
 <head>
 	<title></title>
-	<style type="text/css">
-		iframe{
-			display:block;
-			margin-left: auto;
-			margin-right:auto;
-		}
-		h3{
-			width:600px;
-			margin-left:200px;
-			margin-left: auto;
-			margin-right:auto;
-		}
-		#data{
-			width:600px;
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-		}
-		h4{
-			width:600px;
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-		}
-		#edit textarea{
-			width:600px;
-			height:200px;
-		}
-		#edit_note{
-			display:block;
-			margin-right:auto; 
-			margin-left:auto;
-			margin-top:6px;
-		}
-		#edit_note_time{
-			display:block;
-			margin-right:auto; 
-			margin-left:auto;
-			margin-top:6px;
-		}
-		#text_note{
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-		}
-		#note{
-			width:500px;
-			display:block;
-			margin-left:auto;
-			margin-right:auto;
-		}
-		#edit_button{
-			margin-left:450px;
-			display:inline-block;
-		}
-		#action a{
-			display:inline-block;
-		}
-		#back{
-			float:right;
-			margin-right:100px;
-		}
-		#ytplayer{
-			margin-top:50px;
-		}
-		#ts{
-			display:block;
-			margin-left:50px;
-			margin-top:5px;
-			margin-bottom:5px;
-		}
-		.jot_header{
-			width:100px;
-			margin-left:auto;
-			margin-right:auto;
-		}
 
-	</style>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#edit").hide();
+		// $(document).ready(function(){
+		// 	$("#edit").hide();
 			
-			$(document).on("click","#edit_button",function(){
-				$("#edit").toggle();
-			});
+		// 	$(document).on("click","#edit_button",function(){
+		// 		$("#edit").toggle();
+		// 	});
 
-			$("#edit_note").submit(function(){
-				$.post($(this).attr('action'),$(this).serialize(),function(data){ 
-					$("#text_note").html("<textarea name='note[notes]' id='text_note'>"+data.notes+"</textarea>");
-					$("#note").html("<p id='note'>"+data.notes+"</p>");
-				}, "json")
-				return false;
-			});
+		// 	$("#edit_note").submit(function(){
+		// 		$.post($(this).attr('action'),$(this).serialize(),function(data){ 
+		// 			$("#text_note").html("<textarea name='note[notes]' id='text_note'>"+data.notes+"</textarea>");
+		// 			$("#note").html("<p id='note'>"+data.notes+"</p>");
+		// 		}, "json")
+		// 		return false;
+		// 	});
 
-			$("#edit_time_form").submit(function(){
-				$.post($(this).attr('action'),$(this).serialize(),function(data){ 
-					$("#time_stamph").html("<input type='number' name='note[start_timeh]' placeholder='"+data.time_h+"' id='time_stamph'>");
-					$("#time_stamp1").html("<input type='number' name='note[start_time1]' placeholder='"+data.time_m+"' id='time_stamp1'>" );
-					$("#time_stamp2").html("<input type='number' name='note[start_time2]' placeholder="+data.time_s+" id='time_stamp2'>");
-					alert("Time Updated")
-				}, "json")
-				return false;
-			})
-		});
+		// 	$("#edit_time_form").submit(function(){
+		// 		$.post($(this).attr('action'),$(this).serialize(),function(data){ 
+		// 			$("#time_stamph").html("<input type='number' name='note[start_timeh]' placeholder='"+data.time_h+"' id='time_stamph'>");
+		// 			$("#time_stamp1").html("<input type='number' name='note[start_time1]' placeholder='"+data.time_m+"' id='time_stamp1'>" );
+		// 			$("#time_stamp2").html("<input type='number' name='note[start_time2]' placeholder="+data.time_s+" id='time_stamp2'>");
+		// 			alert("Time Updated")
+		// 		}, "json")
+		// 		return false;
+		// 	})
+		// });
 
 	</script>
 </head>
-<body>
-	<div id='upper_nav'>
+<body id='notes_retrieve'>
+	<div id='nav'>
 		<h1 class='jot_header'>JOT</h1>
+		<a href="/homes/index">Home</a>
+		<a href="/collections/all">Collections</a>
 		<%= link_to 'Back', :back, :class=>"back" %>
 	</div>
-		<h3>Note View</h3>
+		<h3 class='notes_retrieve_header'>Note View</h3>
 
-	<iframe id="ytplayer" type="text/html" width="640" height="390" src="https://www.youtube.com/embed/<%=@note.url%>?autoplay=1&start=<%=@note.start_time%>+"></iframe>
-	<h3><%=@note.collection.name %></h3>
+	<iframe id="ytplayer_retrieve" type="text/html" width="640" height="390" src="https://www.youtube.com/embed/<%=@note.url%>?autoplay=1&start=<%=@note.start_time%>+"></iframe>
+	<h3 class='notes_retrieve_header'><%=@note.collection.name %></h3>
 	<h4>Note:</h4>
-	<div id='data'>
+	<div id='data_retrieve'>
 		<div id='action'>
 			<button id='edit_button' class='btn btn-link'>Edit</button>
 			<a href="/notes/destroy/<%=@note.id%>/<%=@note.collection_id%>">Delete</a>

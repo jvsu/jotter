@@ -1,0 +1,79 @@
+	<style type="text/css">
+		iframe{
+			display:block;
+			margin-left: auto;
+			margin-right:auto;
+		}
+		h3{
+			width:600px;
+			margin-left:200px;
+			margin-left: auto;
+			margin-right:auto;
+		}
+		#data{
+			width:600px;
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		h4{
+			width:600px;
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		#edit_retrieve textarea{
+			width:600px;
+			height:200px;
+		}
+		#edit_note_retrieve{
+			display:block;
+			margin-right:auto; 
+			margin-left:auto;
+			margin-top:6px;
+		}
+		#edit_note_time_retrieve{
+			display:block;
+			margin-right:auto; 
+			margin-left:auto;
+			margin-top:6px;
+		}
+		#text_note_retrieve{
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		#note_retrieve{
+			width:500px;
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		#edit_button_retrieve{
+			margin-left:450px;
+			display:inline-block;
+		}
+		#action_retrieve a{
+			display:inline-block;
+		}
+		#back{
+			float:right;
+			margin-right:100px;
+		}
+		#ytplayer{
+			margin-top:50px;
+		}
+		#ts{
+			display:block;
+			margin-left:50px;
+			margin-top:5px;
+			margin-bottom:5px;
+		}
+		.jot_header{
+			width:100px;
+			margin-left:auto;
+			margin-right:auto;
+		}
+
+
+	</style>
