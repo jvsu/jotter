@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Joe</title>
-  <%= stylesheet_link_tag    'sessions', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>Jot Down Notes</title>
+  <%= stylesheet_link_tag    'sessions'%>
+  <%= javascript_include_tag 'application'%>
   <%= csrf_meta_tags %>
 </head>
 <body>
 	<div class='content'>
+	<div class='upper_nav'>
+		<%= yield :upper_button %>
+		<h1>JOT</h1>
+	</div>
 		<%= yield %>
 	</div>
 	
-
 </body>
 </html>

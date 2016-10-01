@@ -6,10 +6,10 @@
 	</style>
 </head>
 <body>
-	<div class='upper_nav'>
+	<%content_for :upper_button do  %>
 		<a href="/sessions/home" id='home' class="btn btn-success">Home</a>
-		<h1>JOT</h1>
-	</div>
+	<% end%>
+	
 	
 	<% if flash[:su_message]%>
 		<%flash[:su_message].each do |f| %>
