@@ -32,9 +32,10 @@ group :development, :test do
 	gem 'rspec-rails'
      gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
   	gem 'selenium-webdriver', '~> 2.45.0'
+  	gem 'database_cleaner'
+    gem "factory_girl_rails", "~> 4.0"
 end
 
-gem "factory_girl_rails", "~> 4.0"
 
 gem 'hirb'
 gem 'bootstrap-sass', '~> 3.3.4'
