@@ -11,10 +11,7 @@ class User < ActiveRecord::Base
 	has_many :notes
 	has_many :collections
 	has_many :papers
-	has_many :points
-	has_many :point_supports
 	has_many :saves
 	has_many :your_tags
-
 
 end
