@@ -89,18 +89,6 @@ describe "Associations" do
     assc = described_class.reflect_on_association(:your_tags)
     expect(assc.macro).to eq :has_many
   end
-
-
-
-  
-  
-
-  
-
-
-
-
-
 end
 
 

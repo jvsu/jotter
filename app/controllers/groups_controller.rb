@@ -22,8 +22,14 @@ class GroupsController < ApplicationController
   end
 
   def all
-    @user = User.find(session[:user_id])
-    @groups = Group.all.where(:user_id=>@user.id)
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      @groups = Group.all.where(:user_id=>@user.id)
+    else
+      flash[:message]= "You Must Login or SignUp"
+      redirect_to "/sessions/index"
+    end
+
   end
 
   def select

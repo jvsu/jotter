@@ -12,9 +12,18 @@ class CollectionsController < ApplicationController
   end
 
   def all
-    @user = User.find(session[:user_id])
-    @collections = Collection.all.where(user_id:@user.id)
-    @notes = Note.all.where(user_id:@user.id)
+
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      @collections = Collection.all.where(user_id:@user.id)
+      @notes = Note.all.where(user_id:@user.id)
+    else
+      flash[:login_message]= 'Email or Password Not Correct'
+      redirect_to '/sessions/index'
+
+
+    end
+   
   end
 
   def retrieve

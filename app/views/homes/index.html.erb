@@ -15,9 +15,18 @@
 		<a href="/groups/all" class='btn btn-success'>Groups</a>
 	</div>
 	
+	<% if flash[:message]%>
+		<div id='error_messages'>
+			<h4>New Notes Messages:</h4>
+				<%flash[:message].each do |f| %>
+			<p class='error_messages'><%=f%></p>
+		<% end%>
+		</div>
 
+	<%end %>
 	<div id='new_note'>
 		<h2>Add New Notes</h2>
+	
 		<form action='/collections/create' method='post'>
 			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 			<input type='text' name='collection[url]' placeholder='Enter Youtube Video Code' class='new_input'>

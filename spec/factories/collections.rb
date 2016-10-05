@@ -1,8 +1,10 @@
 FactoryGirl.define do
   factory :collection do
-    name "MyString"
-user_id 1
-url "MyString"
+    name "Test Collection"
+	user_id 2
+	url "MyString"
+	share true
   end
+
 
 end
