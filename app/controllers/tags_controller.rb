@@ -4,8 +4,15 @@ class TagsController < ApplicationController
     string = tag_params[:tag_name]
     # split string into an array
     share_collection = Tag.share(string,tag_params[:collection_id])
-    json_data = {collection_id:tag_params[:collection_id]}
-    render json:json_data
+    if share_collection == false
+         json_data = {status:"fail"}
+         render json:json_data
+
+    else
+      json_data = {status:"good",collection_id:tag_params[:collection_id]}
+      render json:json_data
+    end
+   
 
   end
 

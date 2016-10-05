@@ -26,10 +26,17 @@ $(document).ready(function(){
 			})
 			$('form').submit(function(){
 			$.post($(this).attr('action'),$(this).serialize(),function(data){
-				// Hide the form div
+				if (data.status==="fail") 
+				{
+					alert("Invalid Tags");
+				}
+				else
+				{
+					// Hide the form div
 					$("#pub"+data.collection_id).hide();
-				// Change the button
-				$("#pbutton"+data.collection_id).html("<a href='/tags/unshare/"+data.collection_id+"' class='btn btn-link'>UnShare</a>");
+					// Change the button
+					$("#pbutton"+data.collection_id).html("<a href='/tags/unshare/"+data.collection_id+"' class='btn btn-link'>UnShare</a>");
+				};
 			},"json");
 			return false;
 		})
