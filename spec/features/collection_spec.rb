@@ -71,6 +71,165 @@ scenario "Create New Collection without URL" do
 end
 
 
+#all collections view: Create 2 collections then do two checks to see if they are on the page 
+
+scenario "See all Your Collections" do 
+	user = FactoryGirl.create(:user)
+	note1 = Collection.new(user_id:1,url:"youtubelink",name:"collection1").save
+	note2 = Collection.new(user_id:1,url:"youtubelink",name:"collection2").save
+	visit "/sessions/index"
+	within "#login" do	
+		fill_in "user[email]", :with=>"joe@yahoo.com"	
+		fill_in "user[password]", :with=>"aaaaaaaa"	
+		click_button "Submit"				
+	end
+	click_link "Collection"
+	expect(page).to have_content("collection1")
+	expect(page).to have_content("collection2")
+end
+
+
+
+# crreate one collection, all Colletions, click share, Add tags title 
+
+#should have published button
+
+scenario "Should have publish button available is not shared" do 
+	user = FactoryGirl.create(:user)
+	note1 = Collection.new(user_id:1,url:"youtubelink",name:"collection1").save
+	visit "/sessions/index"
+	within "#login" do	
+		fill_in "user[email]", :with=>"joe@yahoo.com"	
+		fill_in "user[password]", :with=>"aaaaaaaa"	
+		click_button "Submit"				
+	end
+	click_link "Collection"
+	expect(page).to have_content("Publish")
+end
+
+
+scenario "Should have  Unshare button available if it is being unshared" do 
+	user = FactoryGirl.create(:user)
+	note1 = Collection.new(user_id:1,url:"youtubelink",name:"collection1",share:true).save
+	visit "/sessions/index"
+	within "#login" do	
+		fill_in "user[email]", :with=>"joe@yahoo.com"	
+		fill_in "user[password]", :with=>"aaaaaaaa"	
+		click_button "Submit"				
+	end
+	click_link "Collection"
+	expect(page).to have_content("UnShare")
+
+end
+
+
+
+
+#All collections, check to see if it does have the naem,  click delete, shouldn't have the name 
+scenario "Should have  Unshare button available if it is being unshared" do 
+	user = FactoryGirl.create(:user)
+	note1 = Collection.new(user_id:1,url:"youtubelink",name:"collection1",share:true).save
+	visit "/sessions/index"
+	within "#login" do	
+		fill_in "user[email]", :with=>"joe@yahoo.com"	
+		fill_in "user[password]", :with=>"aaaaaaaa"	
+		click_button "Submit"				
+	end
+	click_link "Collection"
+	click_link "Delete"
+	expect(page).to_not have_content("collection1")
+end
+
+
+
+#edit sends you to that view page with specific title. 
+
+scenario "Edit a note" do 
+	user = FactoryGirl.create(:user)
+	collection = Collection.new(user_id:1,url:"youtubelink",name:"collection1",share:true).save
+	note = Note.new(url:"dfasfdas", user_id:1,start_time:100, time_stamp_h:30, time_stamp_m:30,time_stamp_s:12, notes:"this is a new note", collection_id:1).save
+	visit "/sessions/index"
+	within "#login" do	
+		fill_in "user[email]", :with=>"joe@yahoo.com"	
+		fill_in "user[password]", :with=>"aaaaaaaa"	
+		click_button "Submit"				
+	end
+	click_link "Collection"
+	click_link "Edit"
+	expect(page).to have_content("this is a new note")
+end
+
+
+
+#click title sends you to add notes view 
+scenario "Edit a note" do 
+	user = FactoryGirl.create(:user)
+	collection = Collection.new(user_id:1,url:"youtubelink",name:"collection1",share:true).save
+	note = Note.new(url:"dfasfdas", user_id:1,start_time:100, time_stamp_h:30, time_stamp_m:30,time_stamp_s:12, notes:"this is a new note", collection_id:1).save
+	visit "/sessions/index"
+	within "#login" do	
+		fill_in "user[email]", :with=>"joe@yahoo.com"	
+		fill_in "user[password]", :with=>"aaaaaaaa"	
+		click_button "Submit"				
+	end
+	click_link "Collection"
+	click_link "collection1"
+	expect(page).to have_content("New Note")
+	expect(page).to have_content("Note View")
+end
+
+scenario "Edit a note" do 
+	user = FactoryGirl.create(:user)
+	collection = Collection.new(user_id:1,url:"youtubelink",name:"collection1",share:true).save
+	note = Note.new(url:"dfasfdas", user_id:1,start_time:100, time_stamp_h:30, time_stamp_m:30,time_stamp_s:12, notes:"this is a new note", collection_id:1).save
+	visit "/sessions/index"
+	within "#login" do	
+		fill_in "user[email]", :with=>"joe@yahoo.com"	
+		fill_in "user[password]", :with=>"aaaaaaaa"	
+		click_button "Submit"				
+	end
+	click_link "Collection"
+	click_link "Home"
+	expect(page).to have_content("New Note")
+end
+
+
+
+
+# unlogged in user vists all collections 
+
+
+scenario "An unlogged in user " do 
+	visit "/collections/all"
+	expect(page).to have_content("You Must Login or Signup")
+end
+
+
+
+#click play should have HTML element for video player
+
+# scenario "Click Play Button to play video at time stamp " do 
+# 	user = FactoryGirl.create(:user)
+# 	collection = Collection.new(user_id:1,url:"youtubelink",name:"collection1",share:true).save
+# 	note = Note.new(url:"dfasfdas", user_id:1,start_time:100, time_stamp_h:30, time_stamp_m:30,time_stamp_s:12, notes:"this is a new note", collection_id:1).save
+# 	visit "/sessions/index"
+# 	within "#login" do	
+# 		fill_in "user[email]", :with=>"joe@yahoo.com"	
+# 		fill_in "user[password]", :with=>"aaaaaaaa"	
+# 		click_button "Submit"				
+# 	end
+# 	click_link "Collection"
+# 	click_button "Play"
+# 	video = find("#ytplayer")
+# 	# video = find_by_id("#ytplayer")
+# 	expect(video).to be(true)
+
+#Can't find the id of the video that is appended to the page
+# end
+
+
+
+
 
 
 

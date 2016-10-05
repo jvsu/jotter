@@ -18,7 +18,7 @@ class CollectionsController < ApplicationController
       @collections = Collection.all.where(user_id:@user.id)
       @notes = Note.all.where(user_id:@user.id)
     else
-      flash[:login_message]= 'Email or Password Not Correct'
+      flash[:login_message]= 'You Must Login or Signup'
       redirect_to '/sessions/index'
 
 

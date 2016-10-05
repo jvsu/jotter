@@ -10,4 +10,11 @@ has_many :tags
   	errors.add(:url,"Cannot be Blank")
   end
 
+
+
+
+
+
+
+
 end
