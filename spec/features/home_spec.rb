@@ -121,6 +121,8 @@ scenario "Create New Note" do
 end
 
 	
+
+
 	#save discovered items
 	# scenario "Save Discovered Item" do 
 	# 	user = FactoryGirl.create(:user)

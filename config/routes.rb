@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     post '/groupnotes/create/' => 'group_notes#create'
 
     # match '/groupnotes/delete/' => 'group_notes#delete', :via=>[:get,:post];
-    get '/groupnotes/delete/' => 'group_notes#delete';
+    post '/groupnotes/delete/' => 'group_notes#delete';
     get '/notes/retrieve/:notes_id' => 'notes#retrieve';
     # match '/papers/create/' => 'papers#create', :via=>[:get,:post];
     # post '/papers/create/' => 'papers#create';

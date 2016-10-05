@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   
-  
-
   subject{described_class.new(first_name:'joseph', last_name:'su',user_name:'jvsu',email:'joe1@yahoo.com',password:"aaaaaaaa")}
 
   it "is valid with valid attributes" do 
@@ -91,6 +89,7 @@ describe "Associations" do
     expect(assc.macro).to eq :has_many
   end
 end
+
 
 
 

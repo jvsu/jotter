@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :group_note do
-    note nil
-group nil
-user nil
+    note_id 1
+	group_id 1
+	user_id 1
   end
 
 end

@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :group do
-    user nil
-name "MyString"
+    user_id 1
+	name "group1"
   end
 
 end

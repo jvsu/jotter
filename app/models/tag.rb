@@ -1,6 +1,6 @@
 class Tag < ActiveRecord::Base
   belongs_to :collection
-
+  
 
 
   def self.collection_tag(user_id)
