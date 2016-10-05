@@ -126,7 +126,7 @@ end
 
 
 #All collections, check to see if it does have the naem,  click delete, shouldn't have the name 
-scenario "Should have  Unshare button available if it is being unshared" do 
+scenario "Delete Collection" do 
 	user = FactoryGirl.create(:user)
 	note1 = Collection.new(user_id:1,url:"youtubelink",name:"collection1",share:true).save
 	visit "/sessions/index"
@@ -194,15 +194,55 @@ scenario "Edit a note" do
 end
 
 
-
-
-# unlogged in user vists all collections 
-
-
-scenario "An unlogged in user " do 
+scenario "An unlogged in user vists page " do 
 	visit "/collections/all"
 	expect(page).to have_content("You Must Login or Signup")
 end
+
+
+#saved content link 
+scenario "Should have publish button available is not shared" do 
+	user = FactoryGirl.create(:user)
+	note1 = Collection.new(user_id:2,url:"youtubelink",name:"saved1").save
+	save = Save.new(user_id:1,collection_id:1).save
+	visit "/sessions/index"
+	within "#login" do	
+		fill_in "user[email]", :with=>"joe@yahoo.com"	
+		fill_in "user[password]", :with=>"aaaaaaaa"	
+		click_button "Submit"				
+	end
+	click_link "Collection"
+	click_link "Subscribed Collections"
+	expect(page).to have_content("saved1")
+end
+
+
+
+
+#share feature, turns button into unshare. 
+
+# scenario "Should have publish button available is not shared" do 
+# 	user = FactoryGirl.create(:user)
+# 	note1 = Collection.new(user_id:1,url:"youtubelink",name:"collection1").save
+# 	visit "/sessions/index"
+# 	within "#login" do	
+# 		fill_in "user[email]", :with=>"joe@yahoo.com"	
+# 		fill_in "user[password]", :with=>"aaaaaaaa"	
+# 		click_button "Submit"				
+# 	end
+# 	click_link "Collection"
+	
+# 	within ".pbutton" do 
+# 		click_button "Publish"
+# 	end
+	
+# 	fill_in "tag[tag_name]", :with=>"#default"	
+# 	within ".pub_info" do 
+# 		click_button "Publish"
+# 	end
+# 	expect(page).to have_content("UnShare")
+# end
+
 
 
 
