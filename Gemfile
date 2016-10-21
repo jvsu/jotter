@@ -31,7 +31,7 @@ gem 'json', '~>1.8.1'
 group :development, :test do 
 	gem 'rspec-rails'
      gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
-  	gem 'selenium-webdriver', '~> 2.45.0'
+  	gem 'selenium-webdriver',"~>2.53.4"
   	gem 'database_cleaner'
     gem "factory_girl_rails", "~> 4.0"
 end

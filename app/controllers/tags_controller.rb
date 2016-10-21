@@ -27,7 +27,7 @@ class TagsController < ApplicationController
 
   def remove
     user = session[:user_id]
-    your_tag = YourTag.all.where(tag:params[:tag],user_id:user)
+    your_tag = YourTag.where(tag:params[:tag],user_id:user)
     delete = YourTag.find(your_tag[0]).delete
     json_data ={message:"success",tag:params[:tag], method:"remove"}
     render json:json_data
@@ -43,7 +43,7 @@ class TagsController < ApplicationController
     #find the collection id and change share to false
     unshare = Collection.find(params[:collection_id]).update(share:false)
     #Get all the tags with Collection id 
-    record = Tag.all.where(collection_id:params[:collection_id])
+    record = Tag.where(collection_id:params[:collection_id])
 
     #delete everything on the tag table with the collection_id
     record.each do |r|

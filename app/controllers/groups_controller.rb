@@ -17,14 +17,14 @@ class GroupsController < ApplicationController
   def view
     @user = User.find(session[:user_id])
     @group = Group.find(params[:group_id])
-    @group_notes = GroupNote.all.where(:user_id=>@user.id, :group_id=>@group.id)
+    @group_notes = GroupNote.where(:user_id=>@user.id, :group_id=>@group.id)
     
   end
 
   def all
     if session[:user_id]
       @user = User.find(session[:user_id])
-      @groups = Group.all.where(:user_id=>@user.id)
+      @groups = Group.where(:user_id=>@user.id)
     else
       flash[:message]= "You Must Login or SignUp"
       redirect_to "/sessions/index"
@@ -34,10 +34,10 @@ class GroupsController < ApplicationController
 
   def select
     @user = User.find(session[:user_id])
-    @collections = Collection.all.where(:user_id=>@user.id)
-    @notes = Note.all.where(:user_id=>@user.id)
+    @collections = Collection.where(:user_id=>@user.id)
+    @notes = Note.where(:user_id=>@user.id)
      @group_id = params[:group_id]
-    @group_notes = GroupNote.all.where(:user_id=>@user.id, :group_id=>@group_id)
+    @group_notes = GroupNote.where(:user_id=>@user.id, :group_id=>@group_id)
 
     # Note the best code makes the feature work
     no_notes =[]

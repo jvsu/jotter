@@ -12,16 +12,13 @@ class CollectionsController < ApplicationController
   end
 
   def all
-
     if session[:user_id]
       @user = User.find(session[:user_id])
-      @collections = Collection.all.where(user_id:@user.id)
-      @notes = Note.all.where(user_id:@user.id)
+      @collections = Collection.where(user_id:@user.id)
+      @notes = Note.where(user_id:@user.id)
     else
       flash[:login_message]= 'You Must Login or Signup'
       redirect_to '/sessions/index'
-
-
     end
    
   end

@@ -32,16 +32,20 @@ RSpec.describe Collection, type: :model do
  	 end
 
 	describe "Associations" do 
-	  it "has many groups" do 
+	  it "has many saves" do 
 	    assc = described_class.reflect_on_association(:saves)
 	    expect(assc.macro).to eq :has_many
 	  end
 
-	  it "has many notes" do 
+	  it "has many tags" do 
 	    assc = described_class.reflect_on_association(:tags)
 	    expect(assc.macro).to eq :has_many
 	  end
 
+	  it "has many notes" do 
+	    assc = described_class.reflect_on_association(:notes)
+	    expect(assc.macro).to eq :has_many
+	  end
 end
 
 end

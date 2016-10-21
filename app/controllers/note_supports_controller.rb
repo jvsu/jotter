@@ -12,7 +12,7 @@ class NoteSupportsController < ApplicationController
 
   def all_groups
      @user = User.find(session[:user_id])
-    @groups = Group.all.where(:user_id=>@user.id)
+    @groups = Group.where(:user_id=>@user.id)
     @point_id = params[:point_id]
     @point = Point.find(@point_id)
   end
@@ -20,7 +20,7 @@ class NoteSupportsController < ApplicationController
   def group
        @user = User.find(session[:user_id])
       @group = Group.find(params[:group_id])
-     @group_notes = GroupNote.all.where(:user_id=>@user.id, :group_id=>@group.id)
+     @group_notes = GroupNote.where(:user_id=>@user.id, :group_id=>@group.id)
      @point_id = params[:point_id]
   end
 private

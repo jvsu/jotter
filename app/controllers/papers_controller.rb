@@ -3,15 +3,15 @@ require 'json'
 class PapersController < ApplicationController
   def index
      @user = User.find(session[:user_id])
-     @papers = Paper.all.where(:user_id=>@user.id)
+     @papers = Paper.where(:user_id=>@user.id)
   end
 
   def new
     @user = User.find(session[:user_id])
     @paper = Paper.find(params[:paper_id])
-    @notes = Note.all.where(:user_id=>@user.id,:paper_id=>@paper.id)
-    @points = Point.all.where(:paper_id=>@paper.id)
-    @supports = PointSupport.all.where(:user_id=>@user.id)
+    @notes = Note.where(:user_id=>@user.id,:paper_id=>@paper.id)
+    @points = Point.where(:paper_id=>@paper.id)
+    @supports = PointSupport.where(:user_id=>@user.id)
   end
 
   def create

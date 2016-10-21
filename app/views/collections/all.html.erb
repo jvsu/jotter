@@ -1,10 +1,6 @@
 <html>
 <head>
-	<title></title>
-	<style type="text/css">
-	
-	</style>
-
+	<title>All Collections</title>
 </head>
 <body>
 	<div id='upper_nav'>
@@ -21,47 +17,7 @@
 		<div id='video'></div>
 	</div>
 	<div id='all_collections'>
-		<%@collections.each do |collection| %>
-			<div class='collection'>
-				<div class='upper_options' id="uo_<%=collection.id %>">
-					<h4><a href="/notes/new/<%=collection.id %>" class='title'><%= collection.name%></a></h4>
-
-					<div id="pbutton<%=collection.id%>" class='pbutton'>
-						<!-- Unpublish and Publish Button -->
-						<%if collection.share==true %>
-							<a href="/tags/unshare/<%=collection.id%>" class='btn btn-link'>UnShare</a>
-						<% else%>
-							<button  id="b_<%=collection.id %>+" class='btn btn-link'>Publish</button>
-						<%end %>
-					</div>
-					<a href="/collections/destroy/<%=collection.id %>" class='delete'>Delete</a>
-				</div>
-				<div id="pub<%=collection.id %>" class='pub_info'>
-					<form action='/tags/share' method='post'>
-						<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-						<input type='text' name='tag[tag_name]' placeholder='Enter Tags: #hello #nike' class='tag_input'>
-						<input type='hidden' name='tag[collection_id]' value=<%= collection.id%>>
-						<input type='submit' value='Publish'>
-					</form>
-				</div>
-				<div class='notes'>
-					<% @notes.each do |note|%>
-						<%if note.collection_id == collection.id %>
-							<div class='jot'>
-								<div class='jot_info'>
-									<p class='time'>Time: <%=note.time_stamp_h%>H <%=note.time_stamp_m%> M <%= note.time_stamp_s%> S</p>
-									<a href="/notes/retrieve/<%=note.id %>">Edit</a>
-									<button id='v+<%=note.start_time%>_<%=note.url %>' class='btn btn-link'>Play</button>
-								</div>
-								<p class='note_content'><%=note.notes %></p>
-							</div>	
-
-						<% end%>
-					<%end %>
-				</div>
-			</div>
-
-		<%end %>
+		<%=render partial: "collection", locals: {collections:@collections} %>
 	</div>
 </body>
 </html>

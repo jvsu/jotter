@@ -2,7 +2,7 @@ class NotesController < ApplicationController
   def new
     @collection = Collection.find(params[:collection_id])
     @user = User.find(session[:user_id])
-    @existing_notes = Note.all.where(:collection_id=>@collection.id)
+    @existing_notes = Note.where(:collection_id=>@collection.id)
   end
 
   def create

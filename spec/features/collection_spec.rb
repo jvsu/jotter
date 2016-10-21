@@ -15,6 +15,8 @@ feature "Collection" do
 
 
 
+
+
 scenario "Create New Collection" do 
 	user = FactoryGirl.create(:user)
 	visit "/sessions/index"
@@ -219,7 +221,7 @@ end
 
 
 
-#share feature, turns button into unshare. 
+# share feature, turns button into unshare. 
 
 # scenario "Should have publish button available is not shared" do 
 # 	user = FactoryGirl.create(:user)
@@ -246,15 +248,16 @@ end
 
 
 
-#click play should have HTML element for video player
+# click play should have HTML element for video player
 
-# scenario "Click Play Button to play video at time stamp " do 
-# 	user = FactoryGirl.create(:user)
+# scenario "Click Play Button to play video at time stamp", js:true do 
+# 	# user = FactoryGirl.create(:user)
+# 	user = User.new(first_name:'joseph', last_name:'su',user_name:'jvsu',email:'joe123@yahoo.com',password:"aaaaaaaa").save
 # 	collection = Collection.new(user_id:1,url:"youtubelink",name:"collection1",share:true).save
 # 	note = Note.new(url:"dfasfdas", user_id:1,start_time:100, time_stamp_h:30, time_stamp_m:30,time_stamp_s:12, notes:"this is a new note", collection_id:1).save
 # 	visit "/sessions/index"
 # 	within "#login" do	
-# 		fill_in "user[email]", :with=>"joe@yahoo.com"	
+# 		fill_in "user[email]", :with=>"joe123@yahoo.com"	
 # 		fill_in "user[password]", :with=>"aaaaaaaa"	
 # 		click_button "Submit"				
 # 	end
@@ -264,7 +267,7 @@ end
 # 	# video = find_by_id("#ytplayer")
 # 	expect(video).to be(true)
 
-#Can't find the id of the video that is appended to the page
+# # Can't find the id of the video that is appended to the page
 # end
 
 
