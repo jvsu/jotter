@@ -8,9 +8,6 @@
 		<h1>JOT</h1>
 		<a href="/homes/index" id='back'>Back</a>
 	</div>
-
-	
-
 	<div id='new_group'>
 		<h2>Create New Group</h2>
 		<form action='/groups/create' method='post' id='new_group_form'>
@@ -24,15 +21,7 @@
 			<p id='flash_message'><%=flash[:message] %></p>
 		<% end%>
 	<div id='all_groups'>
-	
-		<% if @groups%>
-			<% @groups.each do |group|%>
-				<div class='group'>
-					<h4 class='group_name'><a href='/groups/view/<%=group.id%>'><%=group.name %></a></h4>
-					<a  class='delete' href="/groups/delete/<%=group.id %>/<%= @user.id%>">Delete</a>
-				</div>
-			<% end%>
-		<% end%>
+		<%=render partial: "all", locals: {groups:@groups} %>
 	</div>
 
 </body>

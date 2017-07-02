@@ -14,75 +14,18 @@
 	
 	</style>
 	
-
 </head>
 <body id='groups_select_page'>
 	<div id='upper_nav'>
 		<h1>Your Notes</h1>
 		<a href="/groups/view/<%=@group_id %>" id='back'>Back</a>
 	</div>
-
-
-
 	<% if flash[:message]%>
 		<p><%=flash[:message]%></p>
 	<% end%>
 	<div id='video'></div>
 	<div id='all_collections'>
-		<% @collections.each do |collection|%>
-		<h4><%= collection.name%></h4>
-			<div class='notes'>
-				
-					<%@notes.each do |note| %>
-						<%if note.collection_id == collection.id %>
-							<div class='jot'>
-									<% if @group_notes !=[]%>
-										<%@group_notes.each  do |gn|%> 
-											<% if gn.note_id == note.id%>
-											<div id="form_<%=note.id %>">
-												<form id='remove_<%=note.id %>' action="/groupnotes/delete" method='post'>
-													<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-													<input type='hidden' name='group_note[note_id]' value=<%=note.id %>>
-													<input type='hidden' name='group_note[group_id]' value=<%= @group_id%>>
-													<input type='hidden' name='group_note[user_id]' value=<%=@user.id %>>
-													<input type='hidden' name='group_note[gnote]' value=<%=gn.id %>>
-													<input type='submit' value='Remove' id='remove_button' class='btn btn-danger'>
-												</form>
-											</div>
-										<% end%>
-										<%end %>	
-										
-											<% @all_notes.each do |nn|%>
-												<% if nn == note.id %>
-													<div id="form_<%=note.id %>">
-														<form id='add_1_<%=note.id %>' action="/groupnotes/create" method='post'>
-														<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-														<input type='hidden' name='group_note[note_id]' value=<%=note.id %>>
-														<input type='hidden' name='group_note[group_id]' value=<%= @group_id%>>
-														<input type='hidden' name='group_note[user_id]' value=<%=@user.id %>>
-														<input type='submit' value='Add' id='submit_1' class='btn btn-success'>
-													</form>
-												</div>
-												
-												<%end %>
-											<%end %>
-									<%else%>
-									<div id="form_<%=note.id %>">
-										<form id='add_2_<%= note.id%>' action="/groupnotes/create" method='post'>
-											<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-											<input type='hidden' name='group_note[note_id]' value=<%=note.id %>>
-											<input type='hidden' name='group_note[group_id]' value=<%= @group_id%>>
-											<input type='hidden' name='group_note[user_id]' value=<%=@user.id %>>
-											<input type='submit' value='Add' id='submit_2' class='btn btn-success'>
-										</form>
-									</div>			
-								<% end%>
-								<p class='note_content'><a href='' id="v+<%=note.start_time%>_<%=note.url %>"><%=note.notes %></a></p>
-							</div>
-						<% end%>
-					<%end%>
-				</div>
-		<% end%>	
+		<%=render partial: "select", locals: {collections:@collections} %>
 	</div>
 
 </body>

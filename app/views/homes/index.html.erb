@@ -26,7 +26,6 @@
 	<%end %>
 	<div id='new_note'>
 		<h2>Add New Notes</h2>
-	
 		<form action='/collections/create' method='post'>
 			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 			<input type='text' name='collection[url]' placeholder='Enter Youtube Video Code' class='new_input'>

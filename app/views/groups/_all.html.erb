@@ -1,0 +1,8 @@
+	<% if groups%>
+		<% groups.each do |group|%>
+			<div class='group'>
+				<h4 class='group_name'><a href='/groups/view/<%=group.id%>'><%=group.name %></a></h4>
+				<a  class='delete' href="/groups/delete/<%=group.id %>/<%= @user.id%>">Delete</a>
+			</div>
+		<% end%>
+	<% end%>
